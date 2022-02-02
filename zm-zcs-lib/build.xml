@@ -1,0 +1,73 @@
+<project xmlns:ivy="antlib:org.apache.ivy.ant" name="zm-zcs-lib" default="dist">
+  <import file="../zm-zcs/ant-global.xml" />
+
+
+  <target name="build-init">
+    <mkdir dir="${dist.dir}" />
+  </target>
+
+  <target name="dist" depends="build-init,jar">
+    <ivy:resolve file="ivy.xml" />
+    <delete dir="${build.tmp.dir}" />
+    <ivy:retrieve pattern="${dist.dir}/[artifact]-[revision].[ext]" />
+    <copy todir="${dist.dir}">
+      <fileset dir="thirdparty" includes="*.gz" />
+    </copy>
+  </target>
+
+
+  <target name="jar" depends="init-ivy">
+    <ant antfile="../zm-charset/build.xml" inheritAll="false" target="publish-local" />
+    <ant antfile="../ant-1.7.0-ziputil-patched/build.xml" inheritAll="false" target="jar" />
+    <ant antfile="../ant-tar-patched/build.xml" inheritAll="false" target="jar" />
+    <ant antfile="../nekohtml-1.9.13/build.xml" inheritAll="false" target="jar" />
+    <ant antfile="../ical4j-0.9.16-patched/build.xml" inheritAll="false" target="package" />
+    <ant antfile="../java-html-sanitizer-release-20190610.1/build.xml" inheritAll="false" target="jar" />
+    <ant antfile="../antisamy/build.xml" inheritAll="false" target="jar" />
+    <move file="../nekohtml-1.9.13/build/lib/nekohtml.jar" tofile="../nekohtml-1.9.13/build/lib/nekohtml-1.9.13.1z.jar"/>
+    <move file="../ical4j-0.9.16-patched/build/ical4j.jar" tofile="../ical4j-0.9.16-patched/build/ical4j-0.9.16-patched.jar"/>
+    <copy todir="${dist.dir}">
+      <fileset dir="../ant-1.7.0-ziputil-patched/build" includes="*.jar" />
+      <fileset dir="../ant-tar-patched/build" includes="*.jar" />
+      <fileset dir="../nekohtml-1.9.13/build/lib" includes="*.jar" />
+      <fileset dir="../ical4j-0.9.16-patched/build" includes="*.jar" />
+      <fileset dir="../java-html-sanitizer-release-20190610.1/build/lib" includes="*.jar" />
+      <fileset dir="../antisamy/build/lib" includes="*.jar" />
+    </copy>
+    <ivy:install organisation="zimbra" module="zm-charset" revision="latest.integration" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar" />
+    <ivy:install organisation="log4j" module="log4j" revision="1.2.16" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar" />
+    <ivy:install organisation="zimbra"  module="zmzimbratozimbramig" revision="8.7" settingsRef="dev.settings" from="chain-resolver" to="build-dist" overwrite="true" transitive="true" type="jar" />
+    <delete>
+      <fileset dir="${dist.dir}" excludes="*.jar" />
+    </delete>
+    <copy todir="${dist.dir}">
+      <fileset dir="${dist.dir}" />
+      <globmapper from="zm-charset-*.jar" to="zimbra-charset.jar" />
+    </copy>
+  </target>
+
+<!-- Property added to have the functionality of passing version as an argument  -->
+  <property name="zmzcslibs.ext.patch.revision" value="1" />
+  <property name="zmzcslibs.ext.patch.version"
+      value="${zimbra.buildinfo.majorversion}.${zimbra.buildinfo.minorversion}.${zimbra.buildinfo.microversion}"/>
+
+   <target name="pkg" depends="clean,dist">
+    <exec dir="." executable="./pkg-builder.pl" failonerror="true" >
+    <arg value="-v"/>
+    <arg value="${zmzcslibs.ext.patch.version}"/>
+    <arg value="-r"/>
+    <arg value="${zmzcslibs.ext.patch.revision}"/>
+    </exec>
+  </target>
+
+ 
+
+  <target name="clean" depends="clean-pkg">
+    <delete dir="build" />
+  </target>
+
+  <target name="clean-pkg">
+    <delete dir="build/dist" />
+    <delete dir="build/stage" />
+  </target>
+</project>

@@ -1,0 +1,223 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Backing Up the Zimbra server</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Backup the Zimbra Server\nBacking Up the Zimbra server");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Backing Up the Zimbra Server</h1>
+<p>Backing up the Zimbra server on a regular basis can help you quickly restore your mail service if an unexpected crash occurs or individual accounts need to be restored.</p>
+<ul>
+<li class="p-note">
+<p class="note">See the Backup and Restore chapter in the Administrator's Guide for information about how Zimbra data is backed up and restored, learn about other backup options to selectively backup content, &#160;and for information and general guidelines for disaster recovery. Additional backup commands are available from the CLI.</p>
+</li>
+</ul>
+<p>You can configure the backup modes that meet your Zimbra Collaboration Server environment needs, either:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>The <a href="about_the_standard_backup_method.htm"><span style="font-weight: bold;">standard</span> backup method</a> that runs a weekly full backup session and daily incremental backup sessions to back up all mailboxes daily. The standard backup method is appropriate for enterprise deployments where full backups are run during non-working days.</p>
+</li>
+<li class="p">
+<p>The <a href="about_the_autogrouped_backup_method.htm"><span style="font-weight: bold;">auto-grouped</span> backup</a> method is recommended for large ZCS environments where running a full backup of all accounts at one time would take too long. The auto-grouped backup method runs a full backup session for a different group of mailboxes at each scheduled backup. The system administrator configures the interval that backups should run and configures the number of groups that backups are made up of. ZCS then automatically backs up mailboxes in groups over the interval specified.</p>
+</li>
+</ul>
+<p style="margin-left: 0px;">You set the backup mode either globally or per server. In global settings, you can configure the email addresses to receive notification about the results of the backup. The default is to send the notification to the admin account.</p>
+<p style="margin-left: 0px;">Backup sessions are listed under specific servers. Select a server and the Backups Content pane lists the backup labels for the last 30 days.</p>
+<h6>Procedure to Configure Backup as a &#160;Global Settings</h6>
+<ol style="list-style: decimal;">
+<li>
+<p>On the Home page, click Configure Back-ups in the Getting Started column.</p>
+</li>
+<li>
+<p>Select the backup mode, either standard or auto-grouped.</p>
+</li>
+<li>
+<p>If you select auto-grouped, configure the number of groups to spread the mailboxes over.</p>
+</li>
+<li>
+<p>For auto-grouped backup, you might need to set the throttling option. Enabling Throttle automatic backups limits the mailbox count in a daily backup to T/N. This breaks the constraint of backing up all mailboxes in N days, but it helps backup to finish during off hours.</p>
+</li>
+<li>
+<p>In Default Backup target, configure the directory where the backups are saved. The default is /opt/zimbra/backup.</p>
+</li>
+<li>
+<p>The next steps are to configure the notification email.</p>
+<ol style="list-style: lower-alpha;">
+<li>
+<p>In the <span style="font-weight: bold;">Notification email sender</span> text box, enter the email address of the account that will send the notification address (From address).</p>
+</li>
+<li>
+<p>In the <span style="font-weight: bold;">Prefix for notification email subject</span> text box, type the subject of the email notification that is sent.</p>
+</li>
+<li>
+<p>In the Notification email recipients text box, enter the email addresses that should receive the notification.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Configure <span style="font-weight: bold;">Backup minimum free space</span> to the amount of free space required on the backup target disk before a backup session is run. If the disk has less space than the value set, the backup session does not run and an email notification is sent to the administrator.</p>
+</li>
+<li>
+<p>Click <span style="font-weight: bold;">Save</span>.</p>
+</li>
+</ol>
+<h6>Procedure to Configure Backup per Server</h6>
+<ol style="list-style: decimal;">
+<li>
+<p>Go to Configure&gt;Servers and select the server to edit.</p>
+</li>
+<li>
+<p>Select the Backup/Restore page.</p>
+</li>
+<li>
+<p>Select the backup mode, either standard or auto-grouped.</p>
+</li>
+<li>
+<p>If you select auto-grouped, configure the number of groups to spread the mailboxes over.</p>
+</li>
+<li>
+<p>For auto-grouped backup, you might need to set the throttling option. Enabling Throttle automatic backups limits the mailbox count in a daily backup to T/N. This breaks the constraint of backing up all mailboxes in N days, but it helps backup to finish during off hours.</p>
+</li>
+<li>
+<p>Configure <span style="font-weight: bold;">Backup minimum free space</span> to the amount of free space required on the backup target disk before a backup session is run. If the disk has less space than the value set, the backup session does not run and an email notification is sent to the administrator.</p>
+</li>
+<li>
+<p>Click <span style="font-weight: bold;">Save</span>.</p>
+</li>
+</ol>
+<p>&#160;</p>
+<p style="margin-left: 80px;">&#160;</p>
+<p style="margin-left: 0px;">&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

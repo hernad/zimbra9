@@ -1,0 +1,32 @@
+From bf45371dbcba5bd2709d1b9dafe395f75f95d7af Mon Sep 17 00:00:00 2001
+From: Dan Villiom Podlaski Christiansen <dchristiansen@zimbra.com>
+Date: Wed, 21 Jan 2015 13:21:01 +0100
+Subject: [PATCH] Use the combobox role for menu buttons located elsewhere than
+ menus.
+
+---
+diff -aur -x node_modules /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/MenuButton.ts tinymce-4.7.9/src/ui/main/ts/MenuButton.ts
+--- /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/MenuButton.ts	2018-03-12 06:17:32.202425508 -0400
++++ tinymce-4.7.9/src/ui/main/ts/MenuButton.ts	2018-03-12 06:14:14.755685797 -0400
+@@ -10,7 +10,6 @@
+ 
+ import Factory from 'tinymce/core/api/ui/Factory';
+ import Button from './Button';
+-import MenuBar from './MenuBar';
+ 
+ /**
+  * Creates a new menu button.
+@@ -188,7 +187,12 @@
+ 
+     icon = self.settings.icon ? prefix + 'ico ' + prefix + 'i-' + icon : '';
+ 
+-    self.aria('role', self.parent() instanceof MenuBar ? 'menuitem' : 'button');
++    const parentrolemap = {
++      buttongroup: 'button',
++      toolbar: 'button',
++      menubar: 'menuitem'
++    };
++    self.aria('role', parentrolemap[self.parent().type] || 'combobox');
+ 
+     return (
+       '<div id="' + id + '" class="' + self.classes + '" tabindex="-1" aria-labelledby="' + id + '">' +

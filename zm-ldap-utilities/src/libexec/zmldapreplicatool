@@ -1,0 +1,304 @@
+#!/usr/bin/perl
+#
+# ***** BEGIN LICENSE BLOCK *****
+# Zimbra Collaboration Suite Server
+# Copyright (C) 2011, 2012, 2013, 2014, 2015, 2016 Synacor, Inc.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation,
+# version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.
+# If not, see <https://www.gnu.org/licenses/>.
+# ***** END LICENSE BLOCK *****
+#
+use strict;
+use lib '/opt/zimbra/common/lib/perl5';
+use Net::LDAP;
+use XML::Simple;
+use Getopt::Long;
+
+if ( !-d "/opt/zimbra/common/etc/openldap/schema" ) {
+    print "ERROR: openldap does not appear to be installed - exiting\n";
+    exit(1);
+}
+
+my $id = getpwuid($<);
+chomp $id;
+if ( $id ne "zimbra" ) {
+    print "ERROR: must be run as zimbra user\n";
+    exit(1);
+}
+my ( $help, $providerURI, $rid, $tls, $query, $add, $modify, $delete, $newrid );
+$rid = $newrid = 0;
+$providerURI = 0;
+$tls         = "";
+$query       = 0;
+$add         = $modify = $delete = 0;
+
+my $opts_good = GetOptions(
+    'h|help'       => \$help,
+    'q|query'      => \$query,
+    'a|add'        => \$add,
+    'd|delete'     => \$delete,
+    'm|modify'     => \$modify,
+    'n|newrid=i'   => \$newrid,
+    'p|provider=s' => \$providerURI,
+    'r|rid=i'      => \$rid,
+    't|tls=s'      => \$tls,
+);
+
+usage(0) if ($help);
+usage()  if ( !$opts_good );
+usage(0) if ( !$add && !$modify && !$delete && !$query );
+usage(0) if ( !$query && ( !$rid || $rid < 100 ) );
+usage(0) if ( $add && !$providerURI );
+usage(0) if ( $modify && !$providerURI && !$tls && !$newrid );
+usage(0) if ( $providerURI && $providerURI !~ /^ldaps?:\/\// );
+usage(0) if ( $providerURI && $providerURI !~ /\/$/ );
+usage(0) if ( $tls         && $tls ne "critical" && $tls ne "off" );
+
+my $localxml           = XMLin("/opt/zimbra/conf/localconfig.xml");
+my $ldap_root_password = $localxml->{key}->{ldap_root_password}->{value};
+my $ldap_is_master     = $localxml->{key}->{ldap_is_master}->{value};
+my $ldap_replication_password =
+  $localxml->{key}->{ldap_replication_password}->{value};
+my $ldap_starttls_supported =
+  $localxml->{key}->{ldap_starttls_supported}->{value};
+my $zimbra_require_interprocess_security =
+  $localxml->{key}->{zimbra_require_interprocess_security}->{value};
+chomp( $ldap_is_master, $ldap_root_password, $ldap_replication_password );
+
+die "ERROR: Cannot be used on a LDAP master.\n"
+  if ( lc($ldap_is_master) eq "true" );
+
+my %providers;
+
+my $ldap =
+  Net::LDAP->new('ldapi://%2fopt%2fzimbra%2fdata%2fldap%2fstate%2frun%2fldapi/')
+  or die "$@";
+my $mesg = $ldap->bind( "cn=config", password => "$ldap_root_password" );
+$mesg->code && die "Bind: " . $mesg->error . "\n";
+
+my $bdn = "olcDatabase={2}mdb,cn=config";
+$mesg = $ldap->search(
+    base   => "$bdn",
+    filter => "(olcSyncrepl=*)",
+    attrs  => ['olcSyncrepl']
+);
+my $size = $mesg->count;
+if ( $size > 0 ) {
+    my $entry = $mesg->entry(0);
+    foreach ( $entry->get_value('olcSyncRepl') ) {
+        my ( $junk, $entryRID, $entryURI, $entryTLS, $tmpNum );
+        ( $tmpNum,   $entryRID ) = split( /rid=/,      $_,        2 );
+        ( $junk,     $entryURI ) = split( /provider=/, $_,        2 );
+        ( $junk,     $entryTLS ) = split( /starttls=/, $_,        2 );
+        ( $entryRID, $junk )     = split( / /,         $entryRID, 2 );
+        ( $entryURI, $junk )     = split( / /,         $entryURI, 2 );
+        ( $entryTLS, $junk )     = split( / /,         $entryTLS, 2 );
+        $providers{$entryRID}{index}    = $tmpNum;
+        $providers{$entryRID}{provider} = $entryURI;
+        $providers{$entryRID}{security} = $entryTLS;
+        $providers{$entryRID}{entry}    = $_;
+    }
+}
+else {
+    myDie( 1, "ERROR: No replication agreements found.\n" );
+}
+if ($query) {
+    foreach my $index ( keys %providers ) {
+        print
+"rid: $index URI: $providers{$index}{provider} TLS: $providers{$index}{security}\n";
+    }
+    $ldap->unbind;
+    exit 0;
+}
+
+if ( $add && $providers{$rid} ) {
+    myDie( 1, "ERROR: Agreement for RID $rid already exists, aborting.\n" );
+}
+
+if ( $modify && !$providers{$rid} ) {
+    myDie( 1,
+        "ERROR: There is no agreement for RID $rid to modify, aborting.\n" );
+}
+
+if ( $modify && $newrid && $providers{$newrid} ) {
+    myDie( 1,
+        "ERROR: Cannot modify RID $rid to $newrid.  $newrid already exists.\n"
+    );
+}
+
+if ( $delete && scalar( keys %providers ) < 2 ) {
+    myDie( 1,
+        "ERROR: Cannot delete the final replication agreement, aborting.\n" );
+}
+
+if ( $delete && !$providers{$rid} ) {
+    myDie( 1,
+        "ERROR: There is no agreement for RID $rid to delete, aborting.\n" );
+}
+
+my $err;
+
+if ($add) {
+    foreach my $index ( keys %providers ) {
+        if ( $providerURI eq $providers{$index}{provider} ) {
+            myDie( 1, "ERROR: Provider $providerURI already in use.\n" );
+        }
+    }
+    if ($tls) {
+        if ( $tls eq "off" || $providerURI =~ /^ldaps/ ) {
+            $tls = "";
+        }
+        else {
+            if (   $ldap_starttls_supported
+                && $zimbra_require_interprocess_security )
+            {
+                $tls = "starttls=critical";
+            }
+            else {
+                $tls = "";
+            }
+        }
+    }
+    else {
+        if ( $providerURI !~ /^ldaps/ ) {
+            if (   $ldap_starttls_supported
+                && $zimbra_require_interprocess_security )
+            {
+                $tls = "starttls=critical";
+            }
+        }
+        else {
+            $tls = "";
+        }
+    }
+    if ( $tls eq "starttls=critical" ) {
+        $mesg = $ldap->modify(
+            $bdn,
+            add => {
+                olcSyncrepl =>
+"rid=$rid provider=$providerURI bindmethod=simple timeout=0 network-timeout=0 binddn=uid=zmreplica,cn=admins,cn=zimbra credentials=$ldap_replication_password $tls filter=\"(objectclass=*)\" searchbase=\"\" logfilter=\"(&(objectClass=auditWriteObject)(reqResult=0))\" logbase=cn=accesslog scope=sub schemachecking=off type=refreshAndPersist retry=\"60 +\" syncdata=accesslog tls_cacertdir=/opt/zimbra/conf/ca keepalive=240:10:30"
+            },
+        );
+    }
+    else {
+        $mesg = $ldap->modify(
+            $bdn,
+            add => {
+                olcSyncrepl =>
+"rid=$rid provider=$providerURI bindmethod=simple timeout=0 network-timeout=0 binddn=uid=zmreplica,cn=admins,cn=zimbra credentials=$ldap_replication_password filter=\"(objectclass=*)\" searchbase=\"\" logfilter=\"(&(objectClass=auditWriteObject)(reqResult=0))\" logbase=cn=accesslog scope=sub schemachecking=off type=refreshAndPersist retry=\"60 +\" syncdata=accesslog tls_cacertdir=/opt/zimbra/conf/ca keepalive=240:10:30"
+            },
+        );
+        $err = $mesg->code;
+    }
+}
+
+if ($delete) {
+    $mesg =
+      $ldap->modify( $bdn,
+        delete => { olcSyncrepl => "$providers{$rid}{index}" }, );
+    $err = $mesg->code;
+}
+
+if ($modify) {
+    if ($providerURI) {
+        foreach my $index ( keys %providers ) {
+            if ( $providerURI eq $providers{$index}{provider} ) {
+                myDie( 1, "ERROR: Provider $providerURI already in use.\n" );
+            }
+        }
+    }
+    if ($tls) {
+        if ( $providerURI && $providerURI !~ /^ldaps/ ) {
+            if ( $tls eq "critical" ) {
+                $tls = "starttls=critical";
+            }
+        }
+        else {
+            if ( $tls eq "critical" && $providers{$rid}{provider} !~ /^ldaps/ )
+            {
+                $tls = "starttls=critical";
+            }
+        }
+        if ( $tls =~ /starttls/ && $providers{$rid}{entry} !~ /starttls/ ) {
+            $providers{$rid}{entry} =~ s/filter=/$tls filter=/;
+        }
+        elsif ( $tls !~ /starttls/ && $providers{$rid}{entry} =~ /starttls/ ) {
+            $providers{$rid}{entry} =~ s/starttls=critical //;
+        }
+    }
+
+    if ($providerURI) {
+        $providers{$rid}{entry} =~
+          s/provider=$providers{$rid}{provider}/provider=$providerURI/;
+    }
+
+    if ( $rid && $newrid ) {
+        $providers{$rid}{entry} =~ s/rid=$rid/rid=$newrid/;
+    }
+
+    $mesg =
+      $ldap->modify( $bdn,
+        delete => { olcSyncrepl => "$providers{$rid}{index}" }, );
+    $mesg =
+      $ldap->modify( $bdn,
+        add => { olcSyncrepl => "$providers{$rid}{entry}" }, );
+
+    $err = $mesg->code;
+
+    if ($providerURI) {
+        $mesg =
+          $ldap->modify( $bdn, replace => { olcUpdateRef => "$providerURI" }, );
+        if ( $err == 0 ) {
+            $err = $mesg->code;
+        }
+    }
+}
+$ldap->unbind;
+exit($err);
+
+sub usage {
+    my ($msg) = (@_);
+
+    $msg && print STDERR "\nERROR: $msg\n";
+    print STDERR <<USAGE;
+  zmldapreplicatool [-q] [-a|-d|-m [-r RID [-p providerURI] [-t critical|off] [-n newRID]]]
+
+  Where:
+  -a: Add a new replication agreements.  Requires -r and -p options.
+        -t is optional.
+  -d: Delete an existing replication agreement.  Requires the -r option.
+  -m: Modify an existing replication agreement.  Requires the -r option.
+        One or more of -p, -t, and -n are optional.
+  -q: Query the current replication configuration.  This takes no
+        additional options.
+  -r: RID is a unique Integer Replication ID for this replication
+        agreement.  It must be unique inside this server.
+        Example: 100. Must be 100 or larger.
+  -p: providerURI is the LDAP URI for the master.
+        Example: ldap://ldap-provider.example.com:389/
+  -t: set startTLS to critical (required) or off (disabled)
+
+USAGE
+    exit(1);
+}
+
+sub myDie() {
+    my ( $rc, @msg ) = @_;
+    $ldap->unbind;
+    if (@msg) {
+        if ( $rc != 0 ) {
+            warn(@msg);
+        }
+        else {
+            print STDOUT @msg;
+        }
+    }
+    exit($rc);
+}

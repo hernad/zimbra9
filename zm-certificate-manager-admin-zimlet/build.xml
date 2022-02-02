@@ -1,0 +1,44 @@
+<project name="zm-certificate-manager-admin-zimlet" default="package-zimlet">
+
+  <import file="../zm-zcs/ant-global.xml" />
+
+  <!-- archiving zimlet -->
+  <property name="zimlet.file" value="com_zimbra_cert_manager.zip" />
+  <property name="certificateMgr.js.dir" location="js" />
+
+  <target name="build-init">
+    <mkdir dir="${build.zimlet.dir}" />
+  </target>
+
+  <target name="clean" description="Removes build files">
+    <delete dir="${build.dir}" />
+  </target>
+
+  <target name="package-zimlet" depends='build-init' description="put zimlet files into zip archive for deployment">
+    <mkdir dir="${build.zimlet.dir}" />
+    <zip destfile="${build.zimlet.dir}/${zimlet.file}" update="true">
+      <fileset dir="${certificateMgr.js.dir}" includes="*"/>
+    </zip>
+  </target>
+
+  <target name="deploy-zimlet" depends='package-zimlet' description="install UI files, deploy zimlet to LDAP">
+    <echo>Deploying zimlet: com_zimbra_cert_manager</echo>
+    <exec executable="zmzimletctl" failonerror="true">
+        <arg line="-q" />
+        <arg line="deploy" />
+        <arg file="${build.zimlet.dir}/${zimlet.file}" />
+    </exec>
+
+    <antcall target='restart-webserver'/>
+  </target>
+
+  <target name='restart-webserver'>
+    <exec executable="zmmailboxdctl">
+      <arg value="restart"/>
+    </exec>
+  </target>
+
+  <!-- empty jar target used in publish-local of ant-global.xml -->
+  <target name="jar"></target>
+
+</project>

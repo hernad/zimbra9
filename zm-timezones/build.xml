@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<project name="zm-timezones" default="timezones">
+  <import file="build-common.xml"/>
+
+  <!-- Properties -->
+  <property name="build.conf.dir" value="${build.dir}/conf"/>
+  <property name="build.bin.dir" value="${build.dir}/bin"/>
+  <property name="deploy.file.name" value="deploy-timezones"/>
+  <property name="tz.data" value="conf/timezones.ics"/>
+  <property name="tz.dir" value="${build.dir}/js"/>
+  <property name="tz.file" value="${tz.dir}/AjxTimezoneData.js"/>
+  <property name="message.dir" value="${build.dir}/messages"/>
+
+  <target name="zip" depends="timezones" description="Creates the zip file">
+    <zip destfile="${build.dir}/${ant.project.name}-${git.timestamp}.zip" update="true" basedir="${build.dir}" excludes="${ant.project.name}-${git.timestamp}.zip" />
+  </target>
+
+  <path id="compile.path">
+    <path refid="class.path"/>
+    <pathelement location="${build.classes.dir}" />
+  </path>
+
+  <!-- timezones -->
+  <target name="timezones" depends="compile" description="generate timezone files">
+    <taskdef name="timezones" classname="com.zimbra.kabuki.tools.tz.GenerateDataTask" classpathref="compile.path"/>
+
+    <mkdir dir="${tz.dir}"/>
+    <timezones src="${tz.data}" dest="${tz.file}"/>
+
+    <mkdir dir="${message.dir}"/>
+    <copy todir="${message.dir}">
+      <fileset dir="messages" includes="*.properties" />
+    </copy>
+
+    <mkdir dir="${build.bin.dir}"/>
+    <copy file="${src.bin.dir}/${deploy.file.name}" tofile="${build.bin.dir}/${deploy.file.name}"/>
+    <chmod file="${build.bin.dir}/${deploy.file.name}" perm="a+x"/>
+
+    <mkdir dir="${build.conf.dir}"/>
+    <copy file="${tz.data}" todir="${build.conf.dir}"/>
+  </target>
+
+  <target name="pkg" depends="timezones">
+    <delete dir="build/dist"/>
+    <delete dir="build/stage"/>
+    <exec dir="." executable="./pkg-builder.pl" failonerror="true"/>
+  </target>
+
+  <property name="DOCKER_REPO_PUSH_NS" value="zimbra" />
+  <property name="DOCKER_BUILD_TAG" value="2.0.0" />
+  <property name="DOCKER_PUSH_TAG" value="${DOCKER_BUILD_TAG}" />
+
+  <target name="build-image" depends="timezones">
+    <exec executable="docker" failonerror="true">
+      <arg value="build" />
+      <arg value="--build-arg" />
+      <arg value="DOCKER_REPO_NS=${DOCKER_REPO_PUSH_NS}" />
+      <arg value="--cache-from" />
+      <arg value="${DOCKER_REPO_PUSH_NS}/zms-timezones:${DOCKER_BUILD_TAG}" />
+      <arg value="--tag" />
+      <arg value="${DOCKER_REPO_PUSH_NS}/zms-timezones:${DOCKER_BUILD_TAG}" />
+      <arg value="." />
+    </exec>
+  </target>
+
+  <target name="push-image" depends="build-image">
+    <exec executable="docker" failonerror="true">
+        <arg value="push" />
+        <arg value="${DOCKER_REPO_PUSH_NS}/zms-timezones:${DOCKER_PUSH_TAG}" />
+    </exec>
+  </target>
+</project>

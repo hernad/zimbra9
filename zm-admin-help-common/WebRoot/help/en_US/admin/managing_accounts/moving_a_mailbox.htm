@@ -1,0 +1,184 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Moving a Mailbox</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Accounts\nMoving a Mailbox");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Moving a Mailbox</h1>
+<p>Mailboxes can be moved between Zimbra servers that share the same LDAP server.</p>
+<p>Using the administration console makes it easy to move a mailbox between Zimbra servers that share the same LDAP server. The process moves the mailbox to a new server and purges the mailbox from the old server.</p>
+<p>The mailbox move process goes through the following steps:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Puts the mailbox into maintenance mode. In this mode, incoming and outgoing messages are queued but not delivered or sent, and users are temporarily unable to access the mailbox</p>
+</li>
+<li class="p">
+<p>Packs up the mailbox’s message store directory and Index directory on the source server</p>
+</li>
+<li class="p">
+<p>Marks all rows associated with the mailbox in the Data Store on the source server</p>
+</li>
+<li class="p">
+<p>Creates the new entries and directories on the target server</p>
+</li>
+<li class="p">
+<p>Updates the routing information for mail delivery</p>
+</li>
+<li class="p">
+<p>Puts the mailbox back into the active mode</p>
+</li>
+</ul>
+<p>After the mailbox is moved to a new server, a copy still remains on the older server, but the status of old mailbox is marked as closed. Users cannot log on and mail is not delivered. You should check to see that all the mailbox contents were moved successfully before purging the old mailbox.</p>
+<h6>How to move a mailbox</h6>
+<ol style="list-style: decimal;">
+<li class="p">
+<p>In the Account Content pane select the account to move to a different server and in the gear icon click <span style="font-weight: bold;">Move Mailbox</span> on the toolbar.</p>
+</li>
+<li class="p">
+<p>The account and server name are listed in the displayed pane. Select the target server and click <span style="font-weight: bold;">Export</span>.</p>
+</li>
+<li class="p">
+<p>The account is exported. &#160;</p>
+</li>
+<li class="p">
+<p>Select the new server and verify that the mailbox has been successfully moved. Use View Mailbox to verify the contents were moved.</p>
+</li>
+<li class="p">
+<p>If this is the case, click <span style="font-weight: bold;">Purge</span> to remove the account from the old server.</p>
+</li>
+</ol>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

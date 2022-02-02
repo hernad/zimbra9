@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+ <info organisation="zimbra" module="zm-zimlets" status="integration">
+ </info>
+ <dependencies>
+  <dependency org="commons-cli" name="commons-cli" rev="1.2" />
+  <dependency org="commons-codec" name="commons-codec" rev="1.7" />
+  <dependency org="com.google.guava" name="guava" rev="${com.google.guava.version}" />
+  <dependency org="javax.servlet" name="javax.servlet-api" rev="3.1.0" />
+  <dependency org="javax.mail" name="mail" rev="1.4.5" />
+  <dependency org="org.dom4j" name="dom4j" rev="${dom4j.version}" />
+  <dependency org="log4j" name="log4j" rev="1.2.16" />
+  <dependency org="com.unboundid" name="unboundid-ldapsdk" rev="2.3.5" />
+  <dependency org="javax.servlet.jsp" name="jsp-api" rev="2.2.1-b03"/>
+  
+  <dependency org="zimbra" name="zm-common" rev="latest.integration" />
+  <dependency org="zimbra" name="zm-soap" rev="latest.integration" /> 
+  <dependency org="zimbra" name="zm-client" rev="latest.integration" /> 
+  <dependency org="zimbra" name="zm-store" rev="latest.integration"/>
+
+ </dependencies>
+</ivy-module>
+

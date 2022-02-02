@@ -1,0 +1,21 @@
+diff -aur -x node_modules /tmp/zimbra/tinymce-4.7.9/src/plugins/paste/main/ts/core/Clipboard.ts tinymce-4.7.9/src/plugins/paste/main/ts/core/Clipboard.ts
+--- /tmp/zimbra/tinymce-4.7.9/src/plugins/paste/main/ts/core/Clipboard.ts	2018-02-27 07:36:50.000000000 -0500
++++ tinymce-4.7.9/src/plugins/paste/main/ts/core/Clipboard.ts	2018-03-12 08:48:54.423633425 -0400
+@@ -361,7 +361,9 @@
+     }
+ 
+     // Not a keyboard paste prevent default paste and try to grab the clipboard contents using different APIs
+-    if (!isKeyBoardPaste) {
++    // Don't prevent the default if there is no clipboard content (See Bug 97552), and its not IE (which
++    // will crash on trying the default).
++    if (!isKeyBoardPaste && (Env.ie || (Object.keys(clipboardContent).length !== 0))) {
+       e.preventDefault();
+     }
+ 
+@@ -469,4 +471,4 @@
+   getDataTransferItems,
+   hasHtmlOrText,
+   hasContentType
+-};
+\ No newline at end of file
++};

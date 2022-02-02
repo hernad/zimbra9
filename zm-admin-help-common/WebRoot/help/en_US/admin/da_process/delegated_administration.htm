@@ -1,0 +1,172 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Delegated Administration</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Delegated Administration\nDelegated Administration");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Delegated Administration</h1>
+<p>Zimbra Collaboration Server delegated administration lets you create different delegated administrator roles to manage your ZCS environment. Accounts or distribution lists are set up as administrator accounts. &#160;These accounts are granted rights to perform specific administration tasks from the administration console. See the <span style="font-style: italic;"><i>Delegated Administration</i></span> chapter in the ZCSAdministration Guide for more information about delegated administration.</p>
+<p>Delegated administrators are created from the <span style="font-weight: bold;">Manage Accounts</span> toolbar. &#160;You select <span style="font-weight: bold;">New&gt;Administrator</span> and use the Administrator wizard to create an administrator or a group administrator account.</p>
+<p>The wizard walks you through the following steps.</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Create the account, selecting to create either an Admin Group or an Admin Account.</p>
+</li>
+<li style="list-style: none; display: inline;">
+<ul style="list-style: circle;">
+<li class="p">
+<p>Admin Groups are distribution lists (DL) that have Admin Group enabled. This flags the DL as a delegated administrator DL. After the admin group administrator is created and configured with <a href="javascript:void(0);" onclick="BSSCPopup('delegated_administration_text0.htm');return false;" onmouseover="if (parseInt(navigator.appVersion) >= 4) BSPSPopupOnMouseOver(event);" class="popupspot" >rights</a> and <a href="javascript:void(0);" onclick="BSSCPopup('delegated_administration_text1.htm');return false;" onmouseover="if (parseInt(navigator.appVersion) >= 4) BSPSPopupOnMouseOver(event);" class="popupspot" >admin views</a>, you add administrator user accounts to the admin group.</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: circle;">
+<li class="p">
+<p>Admin Account is a user account that has Administrator enabled on the account.</p>
+</li>
+</ul>
+</li>
+<li class="p">
+<p>Select the admin console views that the administrator account can have.</p>
+</li>
+<li class="p">
+<p>Add access rights (ACE) to the account. Rights can be either system defined rights or <a href="inline_attribute_rights.htm">attribute rights</a>. Rights can be granted as a positive or negative right. Negative rights are rights specifically denied to a grantee. The purpose of a negative right is to partially negate rights granted. For example, delegated admin1 has been granted rights to view all accounts, except for the CEO and CFO accounts. The rights to view these two accounts would be negative rights.</p>
+</li>
+</ul>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

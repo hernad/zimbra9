@@ -1,0 +1,213 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Initiating an HSM Session</title>
+<link rel="stylesheet" href="../default.css" type="text/css" />
+<style type="text/css">
+<!--
+ol.whs1 { list-style:decimal; }
+p.whs2 { margin-left:40px; }
+-->
+</style>
+
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpSplitCss">
+//<![CDATA[
+<!--
+if (navigator.appName !="Netscape")
+{   document.write("<link rel='stylesheet' href='../default.css'>");}
+//-->
+//]]>
+</script>
+
+<script type="text/javascript" language="JavaScript" title="WebHelpInlineScript">
+//<![CDATA[
+<!--
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+        origWidth = innerWidth;
+        origHeight = innerHeight;
+        onresize = reDo;
+}
+onerror = null; 
+//-->
+//]]>
+</script>
+<script type="text/javascript" language="javascript1.2" src="../whmsg_nc.js">
+</script>
+<script type="text/javascript" language="javascript" src="../whver_nc.js">
+</script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy_nc.js">
+</script>
+<script type="text/javascript" language="javascript1.2" src="../whutils_nc.js">
+</script>
+<script type="text/javascript" language="javascript1.2" src="../whlang_nc.js">
+</script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic_nc.js">
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Servers\nInitiating an HSM Session");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Initiating an HSM Session</h1>
+<p><a href="hierarchical_storage_management.htm">Hierarchical Storage Management</a> (HSM) allows you to configure storage volumes for older messages. You can initiate an HSM session manually and you can schedule to run the HSM session through the <a title="Admin Guide Appendix B CronTab Jobs" href="http://www.zimbra.com/docs/ne/latest/administration_guide/C_CronTab Jobs.21.1.html" target="_blank">crontab</a>. HSM sessions should be scheduled to run on a regular basis. &#160;Messages are moved to the secondary storage volume based on the HSM policy.</p>
+<p>The <a href="implementing_hsm_policies.htm">HSM policy</a> is configured either from the Global Settings&gt;HSM tab or from the Servers&gt;Volumes tab. The default global HSM policy is to move messages and briefcase files more than 30 days old to the secondary volume.</p>
+<h2>Running HSM Process</h2>
+<p>The first time you run the HSM session, you should schedule the session to run in off-peak hours. &#160;When you start the HSM session, the process iterates through the mailboxes on the server, moving messages that meet the threshold age limit. Depending on how many messages will be moved, the session could take some time. &#160;</p>
+<h6>Procedure</h6>
+<ol class="whs1" style="list-style: decimal;">
+<li class="p">
+<p>Go to <span style="font-weight: bold;">Configure&gt;Server</span>.</p>
+</li>
+<li class="p">
+<p>Select the server and in the gear icon, click Edit.</p>
+</li>
+<li class="p">
+<p>When the server pages open, in the gear icon, click <span style="font-weight: bold;"><b>HSM</b></span>.</p>
+</li>
+<li class="p">
+<p>In the dialog box, click <span style="font-weight: bold;"><b>Start HSM Session</b></span>.</p>
+</li>
+<li class="p">
+<p>Click <span style="font-weight: bold;"><b>OK</b></span>. The session continues to run.</p>
+</li>
+</ol>
+<p class="whs2">While the session is running, a progress bar on the HSM dialog shows how many mailboxes have been processed and how man, BLOBS have been moved. You can open the HSM dialog to see the current status of the session.</p>
+<h3>Aborting an HSM Session</h3>
+<p>A HSM session can be aborted from the <span style="font-weight: bold;"><b>HSM</b></span> dialog, at any time. Clicking <span style="font-weight: bold;"><b>Abort</b></span> stops the session. &#160;If all the messages in a mailbox being processed were not moved before you clicked Abort, no messages from that mailbox are moved from the primary volume. &#160;Messages for mailboxes that have completed the move to the secondary volume are not moved back to the primary volume.</p>
+<ul style="list-style: url('../blue_right.gif');">
+<li class="p-note" style="list-style: url('../blue_right.gif'); color: #000000;">
+<p class="note" style="color: #000000;">HSM sessions started by a cron job can be monitored and aborted from the HSM dialog.</p>
+</li>
+</ul>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

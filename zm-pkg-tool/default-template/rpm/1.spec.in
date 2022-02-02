@@ -1,0 +1,71 @@
+Summary: @@PKG_SUMMARY@@
+Name: @@PKG_NAME@@
+Version: @@PKG_VERSION@@
+Release: @@PKG_RELEASE@@.@@PKG_OS_TAG@@
+License: ZPL and other
+Group: Applications/Messaging
+URL: http://www.zimbra.com
+Vendor: Zimbra, Inc.
+Packager: Zimbra Packaging Services <build@zimbra.com>
+AutoReqProv: no
+Requires: @@PKG_DEPENDS@@
+PreReq: @@PKG_PRE_DEPENDS@@
+Provides: @@PKG_PROVIDES@@
+Obsoletes: @@PKG_OBSOLETES@@
+Conflicts: @@PKG_CONFLICTS@@
+
+%description
+@@PKG_SUMMARY@@
+
+%define __spec_install_pre /bin/true
+
+%define __spec_install_post /usr/lib/rpm/brp-compress /usr/lib/rpm/brp-strip-comment-note %{nil}
+
+%prep
+
+%build
+
+%install
+
+%pre
+if [ "$1" = "1" ]; then
+   :
+   @@PKG_PRE_INSTALL@@
+   # Install
+elif [ "$1" = "2" ]; then
+   :
+   @@PKG_PRE_INSTALL@@
+   # Upgrade
+fi
+
+%post
+if [ "$1" = "1" ]; then
+   :
+   @@PKG_POST_INSTALL@@
+   # Install
+elif [ "$1" = "2" ]; then
+   :
+   # Upgrade
+   @@PKG_POST_INSTALL@@
+fi
+
+%preun
+if [ "$1" = "1" ]; then
+   :
+   # Upgrade
+elif [ "$1" = "0" ]; then
+   :
+   # Uninstallation
+fi
+
+%postun
+if [ "$1" = "1" ]; then
+   :
+   # Upgrade
+elif [ "$1" = "0" ]; then
+   :
+   # Uninstallation
+fi
+
+%files
+@@PKG_INSTALLS@@

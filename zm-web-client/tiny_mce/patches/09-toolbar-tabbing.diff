@@ -1,0 +1,35 @@
+diff -aur -x node_modules /tmp/zimbra/tinymce-4.7.9/src/themes/modern/main/ts/ui/Toolbar.ts tinymce-4.7.9/src/themes/modern/main/ts/ui/Toolbar.ts
+--- /tmp/zimbra/tinymce-4.7.9/src/themes/modern/main/ts/ui/Toolbar.ts	2018-02-27 07:36:50.000000000 -0500
++++ tinymce-4.7.9/src/themes/modern/main/ts/ui/Toolbar.ts	2018-03-12 09:00:30.999944210 -0400
+@@ -104,7 +104,8 @@
+       classes: 'toolbar-grp',
+       ariaRoot: true,
+       ariaRemember: true,
+-      items: toolbars
++      items: toolbars,
++      ignoreTab: true
+     };
+   }
+ };
+@@ -112,4 +113,4 @@
+ export default {
+   createToolbar,
+   createToolbars
+-};
+\ No newline at end of file
++};
+diff -aur -x node_modules /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/KeyboardNavigation.ts tinymce-4.7.9/src/ui/main/ts/KeyboardNavigation.ts
+--- /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/KeyboardNavigation.ts	2018-03-12 09:04:04.944885403 -0400
++++ tinymce-4.7.9/src/ui/main/ts/KeyboardNavigation.ts	2018-03-12 08:57:22.439014086 -0400
+@@ -331,7 +331,10 @@
+ 
+       return true;
+     } else {
+-      return moveFocus(e.shiftKey ? -1 : 1);
++      const navigationRoot = getNavigationRoot(),
++        ignoreTab = navigationRoot && navigationRoot.settings.ignoreTab;
++
++      return !ignoreTab ? moveFocus(e.shiftKey ? -1 : 1) : false;
+     }
+   }
+ 

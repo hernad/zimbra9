@@ -1,0 +1,186 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Account Limits</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Domains\nSetting Account Limits for Domain");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Setting Account Limits for Domains</h1>
+<p>You can limit the number of accounts that can be provisioned on a domain. &#160;The maximum number of accounts allowed on a domain can be set when the domain is created. &#160;You can also edit the domain's <span style="font-weight: bold;">Account Limits</span> page to set up account limits or to change them.</p>
+<p>When the account limit is reached,&#160;if you provision a new account, when you try to save the account, a message displays showing that the account limit has been reached, and the account is not created.&#160;Resource accounts are not counted against the limit you set.</p>
+<p>When multiple Classes of Service (COS) are available, &#160;you can select which classes of service can be configured and how many accounts on the domain can be assigned to the COS.</p>
+<p>The number of account types assigned is tracked. You can see the number assigned/number remaining from any account's General Information page.</p>
+<h4>To set or change the limit on a domain and set the COS limits</h4>
+<ol style="list-style: decimal;">
+<li class="p">
+<p>Go to <span style="font-weight: bold;">Configure &gt; Domains</span> and select the domain to edit.</p>
+</li>
+<li class="p">
+<p>Open the <span style="font-weight: bold;">Account Limits</span> page and enter the maximum number &#160;of accounts for the domain in the <span style="font-weight: bold;">Maximum accounts for this domain</span> field.</p>
+</li>
+<li class="p">
+<p>If you want to configure specific COS for the domain, click <span style="font-weight: bold;">Add</span><span>, otherwise go to Step 6.</span></p>
+</li>
+<li class="p">
+<p>In the <span style="font-weight: bold;">Add maximum accounts</span> dialog <span style="font-weight: bold;">Class of Service</span> field</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Enter the first letters of the COS and then select the COS from the list that displays.</p>
+</li>
+<li class="p">
+<p>In the <span style="font-weight: bold;">Limit</span> field, enter the number of accounts that can be created.</p>
+</li>
+<li class="p">
+<p>Click <span style="font-weight: bold;">OK</span>.</p>
+</li>
+</ul>
+<ul style="list-style: decimal;">
+<li class="P-note">
+<p class="note">The COS name that displays in the Account Type is taken from the COS Description field. If that field is blank, the COS name is displayed.</p>
+</li>
+</ul>
+</li>
+<li class="p">
+<p>Click <span style="font-weight: bold;">Add</span> to add additional COSs as described in step 4.</p>
+</li>
+<li class="p">
+<p>Click <span style="font-weight: bold;">Save</span>. Click <span style="font-weight: bold;">Close</span>.</p>
+</li>
+<li class="p">
+<p>Click the <span style="font-weight: bold;">Browser Refresh</span> button to update the information in the administration console.</p>
+</li>
+</ol>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>ZCS Administrator Types</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Getting Started\nAdministrator Types");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Zimbra Collaboration Server Administrator Types</h1>
+<p>Two types of administrators can be created:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Global Administrator</p>
+</li>
+<li class="p">
+<p>Delegated Administrators</p>
+</li>
+</ul>
+<p>Global administrators are the primary administrators for the Zimbra Collaboration Server and manage, monitor, and maintain the health of the Zimbra email system. The global administrator can create other delegated administrator accounts and delegated administrator group distribution lists. The global administrator grants rights to access various administration tasks and resources to each delegated administrator account or administrator group.</p>
+<p>A delegated administrator role can be as simple as managing a distribution list or resetting &#160;forgotten passwords for one or more users, or a more expansive role such as a domain administrator that manages one or more domains.</p>
+<p>The two major administrator roles are outlined below.</p>
+<h2>Global Administrator</h2>
+<p>The global administration tasks are performed either from the administration console or using the Zimbra command-line interface tools.</p>
+<p>Major responsibilities of global administrators include configuring the following:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Global settings that define the default global values for servers, accounts, COS, and domains</p>
+</li>
+<li class="p">
+<p>Classes of Service (COS) that set the default attributes and features for user's mail accounts</p>
+</li>
+<li class="p">
+<p>Domains settings, GAL settings, and authentication settings</p>
+</li>
+<li class="p">
+<p>Server services, MTA, IMAP, and POP</p>
+</li>
+<li class="p">
+<p>User accounts, aliases, and distribution lists, assigning either a COS to an account or configuring individual account's features and preferences</p>
+</li>
+<li class="p">
+<p>Backup schedules so that in the event of a system failure, Zimbra mail servers can be restored</p>
+</li>
+<li class="p">
+<p>General maintenance and monitoring of the email system</p>
+</li>
+</ul>
+<p>In addition, the global administrator can download and run the Migration Wizard to import email accounts to the Zimbra server.</p>
+<p>The global administrator can delegate a user as a domain administrator and assign a specific COS to a domain.</p>
+<h2>Domain Administrator</h2>
+<p>One of the preconfigured delegated administrator roles is domain administrator group admin distribution list. For all the rights associated with the domain administrator role, an administrator account is assigned to the <span class="attribute">zimbradomainadmins</span> group. &#160;Domain administrator can create accounts only for their domain and all tasks are performed from the administration console.</p>
+<p>The global administrator configures the domain and assigns a COS to that domain. Accounts the domain administrator creates are automatically assigned the domain COS.</p>
+<p>The <span class="attribute">zimbradomainadmins</span> group DL has been granted the rights that let the domain administrators manage the following tasks on their domain:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Provision new accounts, but they do not assign features or attributes. The domain COS is configured with the features and attributes for accounts</p>
+</li>
+<li class="p">
+<p>Edit account information</p>
+</li>
+<li class="p">
+<p>Change passwords</p>
+</li>
+<li class="p">
+<p>Change the status of an account</p>
+</li>
+<li class="p">
+<p>Create, delete, and move aliases</p>
+</li>
+<li class="p">
+<p>Create, modify, and delete distribution lists</p>
+</li>
+<li class="p">
+<p>Assign other users as administrators</p>
+</li>
+<li class="p">
+<p>Download and run the import and migration tools</p>
+</li>
+<li class="p">
+<p>View mailbox quotas</p>
+</li>
+<li class="p">
+<p>Set mailbox quotas (optional). &#160;The domain administrator can set mailbox quotas if the global administrator enables the domain administrator configuration to modify the account mail quota</p>
+</li>
+</ul>
+<p><a href="javascript:void(0);" onclick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) &gt;=2 &amp;&amp; typeof(PickupDialog_Invoke) == 'function') PickupDialog_Invoke(e,'','Delegated Administration','../da_process/delegated_administration.htm','Delegating a Domain Administrator','delegating_a_domain_administrator.htm','Tasks Performed from Administration Console','../getting_started/tasks_performed_from_aministration_console.htm');return false;" title="Related Topics"><img src="../ss_btn_related_topics.gif" border="0" height="17" width="81" alt="Related Topics" /></a> </p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="JavaScript">//<![CDATA[
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//]]></script><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

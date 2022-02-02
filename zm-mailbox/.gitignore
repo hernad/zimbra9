@@ -1,0 +1,15 @@
+.classpath
+.project
+.settings/
+.idea/
+build/
+bin/
+.DS_Store
+outgoing
+.metadata/
+.recommenders/
+store/.pmd
+store/.ruleset
+eclipse-ivysettings.xml
+store/tmp/
+common-passwords.txt

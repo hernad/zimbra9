@@ -1,0 +1,33 @@
+<project name="zm-charset" default="jar">
+
+  <import file="../zm-zcs/ant-global.xml"/>
+  
+  <target name="jar" depends="compile" description="Creates the jar file">
+    <mkdir dir="build/classes/META-INF/services"/>
+    <copy todir="build/classes/META-INF/services" file="conf/java.nio.charset.spi.CharsetProvider"/>
+    <antcall target="zimbra-jar">
+       <param name="implementation.title" value="Zimbra Charset"/>
+    </antcall>
+  </target>
+
+  <target name="deploy" depends="jar,set-dev-version">
+    <ant dir="${server.dir}" target="stop-webserver" inheritAll="false"/>
+    <copy todir="${common.jars.dir}">
+      <fileset dir="${build.dir}" includes="${jar.file}" />
+    </copy>
+    <copy todir="${jetty.endorsed.jars.dir}">
+      <fileset dir="${build.dir}" includes="${jar.file}" />
+    </copy>
+    <ant dir="${server.dir}" target="start-webserver" inheritAll="false"/>
+  </target>
+
+  <target name="undeploy">
+    <ant dir="${server.dir}" target="stop-webserver" inheritAll="false"/>
+    <delete>
+      <fileset dir="${common.jars.dir}" includes="zm-charset*.jar,zimbra-charset.jar"/>
+      <fileset dir="${jetty.endorsed.jars.dir}" includes="zm-charset*.jar,zimbra-charset.jar"/>
+	</delete>
+    <ant dir="${server.dir}" target="start-webserver" inheritAll="false"/>
+  </target>
+
+</project>

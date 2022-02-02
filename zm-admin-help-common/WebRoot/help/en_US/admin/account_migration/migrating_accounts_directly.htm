@@ -1,0 +1,248 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Migrating Accounts Directly</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Migrating Accounts to Zimbra\nMigrating Accounts Directly");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Migrating Accounts</h1>
+<ol style="list-style: decimal;">
+	<li><p>Go to <span class="attribute">Tools and Migration &gt; Account 
+	 Migration</span> and in the gear icon menu select <span class="attribute">Migration 
+	 Wizard</span>.</p></li>
+	<li><p>In the Introduction dialog box, select the type of mail server 
+	 that accounts and data are migrating from.</p></li>
+	<li><p>If you are migrating accounts, set <span class="attribute">Would 
+	 you like to import account records</span> to <span class="attribute">Yes</span>.</p></li>
+</ol>
+<p style="margin-left: 40px;">If the account’s data is being imported now, 
+ set <span class="attribute">Would you like to import mail</span> to <span 
+	 class="attribute">Yes</span>.</p>
+<p style="margin-left: 40px;">If you already migrated the accounts, but 
+ did not import the account data and now want to, set <span class="attribute">Would 
+ you like to import account records</span> to <span class="attribute">No</span> 
+ and set <span class="attribute">Would you like to import mail</span> to 
+ <span class="attribute">Yes</span>. &#160;See <a href="importing_account_data.htm">Importing 
+ Account Data</a>.</p>
+<p style="margin-left: 40px;">Click <span class="attribute">Next</span>.</p>
+<ol start="4" style="list-style: decimal;">
+	<li><p>On the <span class="attribute">Overview</span> dialog box, select 
+	 how the account information is being provided: Import from LDAP directory, 
+	 Import form another Zimbra LDAP directory, or import from an XML file.</p></li>
+	<li><p>If you select an LDAP Directory, in the <span class="attribute">Bulk 
+	 Provisioning Options</span> page, set the password configuration option 
+	 for the accounts to be provisioned and if you are migrating in a split 
+	 domain configuration, set the SMTP host name and port. &#160;</p></li>
+</ol>
+<p style="margin-left: 40px;">&#160;&#160;a. &#160;Set either</p>
+<p style="margin-left: 64px;"><span class="attribute">Generate a random 
+ password for each account</span>. If the wizard generates random passwords 
+ for each account, you must download the .csv file that is created as this 
+ file lists the passwords that were created. You need to give the password 
+ information to each user.</p>
+<p style="margin-left: 64px;">or</p>
+<p style="margin-left: 64px;"><span class="attribute">Use the same password 
+ for all new accounts</span>. Enter the password to be used and &#160;enter 
+ again to confirm password.</p>
+<p style="margin-left: 40px;">&#160;b. &#160;&#160;Check <span class="attribute">Require 
+ users to change the password after first login</span>.</p>
+<p style="margin-left: 40px;">&#160;c. &#160;&#160;Set the <span class="attribute">Length 
+ of generated password</span>. The default is 8 characters. The password 
+ can be from 6 to 64 characters.</p>
+<p style="margin-left: 40px;">&#160;d. &#160;&#160;For split domain configurations, 
+ set the SMTP Host name and port.</p>
+<p style="margin-left: 40px;">Click <span class="attribute">Next</span>.</p>
+<ol start="6" style="list-style: decimal;">
+	<li><p>On the <span class="attribute">Directory connection</span> dialog,</p>
+	<ol style="list-style: lower-alpha;">
+		<li><p>Enter the details for connecting to your LDAP server.</p></li>
+		<li><p>Enter the maximum accounts to import at one time. The default 
+		 is 0, which means that no limits are set.</p></li>
+		<li><p>Enable <span class="attribute">Automatically create missing 
+		 domains</span>, so that when an account is imported and the domain 
+		 they were on is not already created on ZCS, 
+		 the domain is automatically created.</p></li>
+	</ol></li>
+</ol>
+<p style="margin-left: 80px;">If you do not enable Automatically create 
+ missing domains, accounts from domains that do not exist on ZCS are not created. Disabling 
+ this option, makes it easy to import accounts from specific domains that 
+ have been pre created on ZCS.</p>
+<ol style="list-style: lower-alpha;">
+	<li style="list-style: none; display: inline;"><ol start="4" style="list-style: lower-alpha;">
+		<li><p>Enter the following information about the AD or LDAP server:Server 
+		 Name.</p>
+		<ul style="list-style: disc;">
+			<li><p>The LDAP URL is entered as ldap://ldapdirectory.example.com.</p></li>
+			<li><p>If the default port number is not correct, change it..</p></li>
+			<li><p>Use Security. Select SSL if this is used.</p></li>
+			<li><p>Bind DN and bind password.</p></li>
+			<li><p>LDAP filter. In this field enter the LDAP search filter 
+			 to run. Here you can define search criteria to collect the 
+			 type of account information you want to import. The filter 
+			 in the field (objectClass=organizationalPerson), 
+			 is set to gather account information, including email address, 
+			 individual first, middle, last names, postal and phone information 
+			 if it is available. You can change the filter.</p></li>
+			<li><p>LDAP search base is used to configure which subsection 
+			 of the LDAP forest to search.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="margin-left: 40px;">After you complete this dialog, click <span 
+	 class="attribute">Next</span>.</p>
+<p style="margin-left: 40px;">The Account Migration Wizard connects to 
+ the directory server and generates a report showing the number of domains 
+ found; number of accounts found on the server and how many of those accounts 
+ are already created on ZCS. This dialog also shows the password options 
+ you configured.</p>
+<ol start="7" style="list-style: decimal;">
+	<li><p style="margin-left: 0px;">Click <span class="attribute">Next</span>. 
+	 The accounts are provisioned on the ZCS server.</p></li>
+</ol>
+<p style="margin-left: 40px;">A <span class="attribute">Provision Accounts</span> 
+ dialog displays the number of accounts imported and number of accounts 
+ that failed to be imported. A .csv file is created with the list of all 
+ provisioned accounts. This list includes the password information for 
+ each account.</p>
+<ol start="8" style="list-style: decimal;">
+	<li style="font-weight: normal;"><p style="margin-left: 0px;">Download 
+	 the .csv file that lists the provisioned accounts and their passwords. 
+	 The .csv file is deleted when you close the wizard.</p></li>
+</ol>
+<p style="margin-left: 40px;"><span style="font-weight: bold;">Important</span>: 
+ If you do not download the file, you cannot access the report later.</p>
+<p style="margin-left: 40px;">&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

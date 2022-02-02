@@ -1,0 +1,2 @@
+%%contains VAR:zimbraMtaSmtpdSenderLoginMaps lmdb:/opt/zimbra/conf/slm-exceptions-db%%
+%%contains VAR:zimbraMtaSmtpdSenderLoginMaps proxy:ldap:/opt/zimbra/conf/ldap-slm.cf%%

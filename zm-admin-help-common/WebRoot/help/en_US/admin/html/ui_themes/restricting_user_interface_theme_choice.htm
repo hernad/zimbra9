@@ -1,0 +1,208 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2009, 2010, 2011, 2012, 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2009, 2010, 2011, 2012, 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="generator" content="Adobe RoboHelp 10" />
+<title>Restricting User Interface Theme Choice</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Working with Themes\nRestricting User Interface Theme Choice");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+
+<h1>Changing the Logo on the Touch Client</h1>
+<h2>Customizing Base Theme Colors</h2>
+<p>It is not possible to customize the colors int he ZCS Touch Client, 
+ at this point in time. To replace the ZWC logo, please see instructions 
+ below</p>
+<h2>Replacing the ZWC Logo</h2>
+<p>Graphics to Replace</p>
+<ul style="list-style: disc;">
+	<li>Company logo that displays on the login and splash screens for 
+	 ZCS Touch Client. The dimension of the graphic must be exactly 300 
+	 x 65 for low dpi devices and 600 x 130 for retina display / high dpi 
+	 devices. The image will always be displayed on a white background.</li>
+	<li>Watermark image that displays in the bottom right of an email message. 
+	 The dimension of the graphic must be exactly 200 x 45 for low dpi 
+	 devices and 400 x 90 for retina display / high dpi devices.</li>
+	<li>Bookmark image on the Springboard. The dimension of the graphic 
+	 must be exactly:</li>
+	<ul style="list-style: disc;">
+		<li>57 x 57 for low dpi mobile phones</li>
+		<li>114 x 114 for retina display / high dpi phones</li>
+		<li>72 x 72 for low dpi tablets</li>
+		<li>144 x 144 for retina display / high dpi tablets</li>
+	</ul>
+</ul>
+<h2>Using Command Line Interface to add your logos</h2>
+<p>In release 8.5, it is not possible to use Command Line Interface to 
+ replace the ZWC Logo</p>
+<h2>Changing Logo on Admin Console</h2>
+<p>At this point in time, it is not possible to use Admin Console to replace 
+ the ZWC Logo</p>
+<h2>Change Logo by Replacing Files in the Folder Structure</h2>
+<p>You can replace the Zimbra logo with your company's logo globally by 
+ replacing the image files in the paths specified below. Note that these 
+ image files will not survive an upgrade. So please make sure to keep a 
+ backup and repeat the replacement process after an upgrade</p>
+<ul style="list-style: disc;">
+	<li>To replace the Company logo that displays on the login and splash 
+	 screens for ZCS Touch Client</li>
+	<ul style="list-style: disc;">
+		<li>For low dpi devices, replace /skins/_base/logos/TouchLonginBanner.png 
+		 with your company logo. Dimension of the graphic must be exactly 
+		 300 x 65.</li>
+		<li>For retina display/high dpi devices: &#160;&#160;&#160;&#160;&#160;/skins/_base/logos/TouchLonginBanner@2x.png 
+		 &#160;with your company logo. Dimemsion of the graphic must be 
+		 exactly 600 x 130.</li>
+	</ul>
+	<li>To replace the Watermark image that displays in the bottom right 
+	 of an email message.</li>
+	<ul style="list-style: disc;">
+		<li>For low dpi devices, replace /skins/_base/logos/TouchWatermarkBanner.png 
+		 with your company logo. Dimension of the graphic must be exactly 
+		 200 x 45.</li>
+		<li>For retina display/high dpi devices, replace/skins/_base/logos/TouchWatermarkBanner@2x.png 
+		 with your company logo. The dimension of the graphic must be exactly 
+		 400 x 90.</li>
+	</ul>
+	<li>To replace the Bookmark image on the Springboard. The dimension 
+	 of the graphic must be exactly:</li>
+	<ul style="list-style: disc;">
+		<li>For low dpi mobile phones, replace /img/logo/Icon.png with 
+		 your company logo. Dimension of the graphic must be exactly 57 
+		 x 57.</li>
+		<li>For retina display / high dpi mobile phones,replace /img/logo/Icon@2x.png 
+		 with your company logo. Dimension of the graphic must be exactly 
+		 114 x 114.</li>
+		<li>For low dpi tablets, replace /img/logo/Icon~ipad.png with your 
+		 company logo. Dimension of the graphic must be exactly 72 x 72.</li>
+		<li>For retina display / high dpi tables, replace /img/logo/Icon~iPad@2x.png 
+		 with your company logo. Dimension of the graphic must be exactly 
+		 144 x 144. </li>
+	</ul>
+</ul>
+<p>&#160;</p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

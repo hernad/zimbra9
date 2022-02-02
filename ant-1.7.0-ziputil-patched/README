@@ -1,0 +1,14 @@
+This directory contains an implementation of ZipOutputStream that doesn't
+require huge memory footprint for central directory of zip entries.  Central
+directory data is written to a temporary file as the zip file is written
+and copied to the stream at the end.
+
+The original code is the org.apache.tools.zip.* classes from Apache Ant 1.7.0
+release.  The package was renamed to com.zimbra.common.util.zip to avoid
+possible namespace collision with Ant classes.
+
+All 11 classes in the package were copied but only ZipOutputStream class has
+been modified.
+
+Running ant here will create build/ant-1.7.0-ziputil-patched.jar file.  A copy
+of this jar file is checked in under ZimbraCommon/jars.

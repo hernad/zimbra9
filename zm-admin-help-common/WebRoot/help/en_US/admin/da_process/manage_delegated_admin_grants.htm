@@ -1,0 +1,206 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Manage Delegated Admin Grants</title>
+<link rel="stylesheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Delegated Administration\nManage Delegated Admin Grants");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Manage Delegated Administrators' Granted Rights</h1>
+<p>You can manage the rights granted to an administrator or an administrator group through the Configure Grants link on the account's toolbar.</p>
+<p>When you click Configure Grants, &#160;the Content pane displays the directly assigned grants and inherited grants. You can grant additional access control rights, edit rights or delete rights for the administrator account or administrator group account.</p>
+<h6>To add &#160;Access Control Entries (ACE)</h6>
+<ol style="list-style: decimal;">
+<li>
+<p>Select the admin account or admin group to be modified. Click <span style="font-weight: bold;">Configure Grants</span>.</p>
+</li>
+<li>
+<p>To add a right, click <span style="font-weight: bold;"><b>Add</b></span>. The Add ACE dialog opens with the administrator account name displayed in the Grantee Name field. &#160;</p>
+</li>
+<li>
+<p>Select the <a href="delegated_administration_target_types.htm">target type</a> from the list.</p>
+</li>
+<li>
+<p><span style="margin-left: 20px;">E</span>nter the target's name. The name must be the same as configured in ZCS. For example, domain_name@example.com.</p>
+</li>
+<li>
+<p>Select the type of right to grant, either <span style="font-weight: bold;"><b>System Defined Right</b></span> or an individual <span style="font-weight: bold;"><b>Attribute Right</b></span>.</p>
+</li>
+</ol>
+<p style="margin-left: 40px;">If you select System Defined Right, you must enter the name of the right associated with that target. &#160;For a list of rights, see the <span style="font-weight: bold;"><b>Rights</b></span> folder in the Overview Pane Configuration section.</p>
+<p style="margin-left: 40px;">If you select <a href="inline_attribute_rights.htm">Attribute Right</a>, you must select whether the right is read-only or write. The attribute right target type associated with the target type you selected are listed.</p>
+<ol start="6" style="list-style: decimal;">
+<li style="font-weight: normal;">
+<p>In the <b>Right Name</b> field, enter the right name. Typing in the field displays a list of rights associated with the target type selected.</p>
+</li>
+<li style="font-weight: normal;">
+<p>Select whether this is a positive or negative right. When you select Is Positive Right, if this administrator can also grant the same right to other administrators, check <span style="font-weight: bold;">Can grant the right to other admins</span>.</p>
+</li>
+<li style="font-weight: normal;">
+<p>Click <span style="font-weight: bold;">Add and More</span> to add this right and open the Add ACE window again to add another right. Click <span style="font-weight: bold;">Add and Finish</span> to add this right and finish the configuration.</p>
+</li>
+</ol>
+<p style="font-weight: normal;">When an ACE is created, the ACE includes the following information:</p>
+<ul style="list-style: disc;">
+<li>
+<p style="font-weight: normal;">Zimbra ID of the grantee account</p>
+</li>
+<li>
+<p style="font-weight: normal;">Type of grantee, either user (usr) or group distribution list (grp)</p>
+</li>
+<li>
+<p style="font-weight: normal;">Allowed or denied right. (+ or -) status</p>
+</li>
+</ul>
+<h6>To edit ACE</h6>
+<ol class="whs1" style="list-style: decimal;">
+<li class="p">
+<p>Select the grantee (admin account name) to edit and click <span style="font-weight: bold;"><b>Edit</b></span>.</p>
+</li>
+<li class="p">
+<p>Make your changes and click <span style="font-weight: bold;"><b>Edit and Finish</b></span>.</p>
+</li>
+</ol>
+<h6>To delete the ACL</h6>
+<ol class="whs1" style="list-style: decimal;">
+<li class="p">
+<p>Select the grantee (admin account name) to delete and click <span style="font-weight: bold;"><b>Delete</b></span>. &#160;</p>
+</li>
+<li class="p">
+<p>An Informational dialog opens to confirm the deletion. Click <span style="font-weight: bold;"><b>Yes</b></span>. &#160;</p>
+</li>
+</ol>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

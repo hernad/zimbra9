@@ -1,0 +1,184 @@
+#!/usr/bin/perl
+# 
+# ***** BEGIN LICENSE BLOCK *****
+# Zimbra Collaboration Suite Server
+# Copyright (C) 2012, 2013, 2014, 2015, 2016 Synacor, Inc.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation,
+# version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.
+# If not, see <https://www.gnu.org/licenses/>.
+# ***** END LICENSE BLOCK *****
+# 
+
+use strict;
+use lib "/opt/zimbra/common/lib/perl5";
+use Zimbra::Util::Common;
+use File::Grep qw (fgrep);
+use File::Path;
+use Net::LDAP;
+use Net::LDAP::LDIF;
+use Net::LDAP::Entry;
+use Crypt::SaltedHash;
+use MIME::Base64;
+
+my $source_config_dir = "/opt/zimbra/common/etc/openldap";
+my $config_dir = "/opt/zimbra/conf";
+my $ldap_config_dir="/opt/zimbra/data/ldap/config/cn\=config";
+
+my $zimbra_user=getLocalConfig("zimbra_user");
+my $zimbra_ldap_userdn = getLocalConfig("zimbra_ldap_userdn");
+my $zimbra_ldap_password = getLocalConfig("zimbra_ldap_password");
+my $ldap_root_password = getLocalConfig("ldap_root_password");
+my $ldap_master_url = getLocalConfig("ldap_master_url");
+my $ldap_is_master = getLocalConfig("ldap_is_master");
+my $ldap_starttls_supported = getLocalConfig("ldap_starttls_supported");
+my $zimbra_tmp_directory = getLocalConfig("zimbra_tmp_directory");
+
+if (lc($ldap_is_master) ne "true" ) {
+  exit 0;
+}
+
+if (!-d $zimbra_tmp_directory) {
+  File::Path::mkpath("$zimbra_tmp_directory");
+}
+
+my $rc=qx(/opt/zimbra/bin/ldap start);
+
+my @masters=split(/ /, $ldap_master_url);
+my $master_ref=\@masters;
+my $ldap = Net::LDAP->new($master_ref)  or  die "$@";
+
+# startTLS Operation
+my $mesg;
+if ($ldap_master_url !~ /^ldaps/i) {
+  if ($ldap_starttls_supported) {
+    $mesg = $ldap->start_tls(
+         verify => 'none',
+         capath => "/opt/zimbra/conf/ca",
+         ) or die "start_tls: $@";
+    $mesg->code && die "TLS: " . $mesg->error . "\n";
+  }
+}
+
+$mesg = $ldap->bind("cn=config", password=>"$ldap_root_password");
+
+my $infile = "$source_config_dir/zimbra/zimbra.ldif";
+my $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+while ( not $ldifin->eof() ) {
+    my $entry = $ldifin->read_entry();
+    if ( $ldifin->error() ) {
+      print "Error msg: ", $ldifin->error ( ), "\n";
+      print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+    } elsif ( $entry )  {
+      $entry->changetype("add");
+      $entry->update($ldap);
+    }
+}
+
+$infile = "$source_config_dir/zimbra/zimbra_globalconfig.ldif";
+$ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+while ( not $ldifin->eof() ) {
+    my $entry = $ldifin->read_entry();
+    if ( $ldifin->error() ) {
+      print "Error msg: ", $ldifin->error ( ), "\n";
+      print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+    } elsif ( $entry ) {
+      $entry->changetype("add");
+      $entry->update($ldap);
+    }
+}
+
+$infile = "$source_config_dir/zimbra/zimbra_defaultcos.ldif";
+$ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+while ( not $ldifin->eof() ) {
+    my $entry = $ldifin->read_entry();
+    if ( $ldifin->error() ) {
+      print "Error msg: ", $ldifin->error ( ), "\n";
+      print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+    } elsif ( $entry ) {
+      $entry->changetype("add");
+      $entry->update($ldap);
+    }
+}
+
+$infile = "$source_config_dir/zimbra/zimbra_defaultexternalcos.ldif";
+$ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+while ( not $ldifin->eof() ) {
+    my $entry = $ldifin->read_entry();
+    if ( $ldifin->error() ) {
+      print "Error msg: ", $ldifin->error ( ), "\n";
+      print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+    } elsif ( $entry ) {
+      $entry->changetype("add");
+      $entry->update($ldap);
+    }
+}
+
+if (-f "/opt/zimbra/conf/ldap/zimbra_mimehandlers.ldif") {
+  $infile = "/opt/zimbra/conf/ldap/zimbra_mimehandlers.ldif";
+} else {
+  $infile = "$source_config_dir/zimbra/zimbra_mimehandlers.ldif";
+}
+$ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+while ( not $ldifin->eof() ) {
+    my $entry = $ldifin->read_entry();
+    if ( $ldifin->error() ) {
+      print "Error msg: ", $ldifin->error ( ), "\n";
+      print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+    } elsif ( $entry ) {
+      $entry->changetype("add");
+      $entry->update($ldap);
+    }
+}
+
+if ( -d "/opt/zimbra/lib/conf/" ) {
+    opendir(DIR, "/opt/zimbra/lib/conf") || die "can't opendir /opt/zimbra/lib/conf: $!";
+    while (my $file = readdir(DIR)) {
+       next unless (-f "/opt/zimbra/lib/conf/$file");
+       next unless ( $file =~ m/ldif$/);
+       $infile = "/opt/zimbra/lib/conf/$file";
+       $ldifin = Net::LDAP::LDIF->new("$infile", "r", onerror => 'undef' );
+       while ( not $ldifin->eof() ) {
+            my $entry = $ldifin->read_entry();
+            if ( $ldifin->error() ) {
+              print "Error msg: ", $ldifin->error ( ), "\n";
+              print "Error lines:\n", $ldifin->error_lines ( ), "\n";
+            } elsif ( $entry ) {
+              $entry->changetype("modify");
+              foreach my $attr ($entry->attributes()) {
+                my $ref = $entry->get_value ( $attr, asref => 1 );
+                #print "Processing $attr => @$ref\n";
+                $entry->replace($attr => [@$ref]);
+              }
+              my $msg = $entry->update($ldap);
+              if ($msg->code()) {
+                print "Error msg: ", $entry->dn(), " ", $msg->error(), "\n";
+              }
+            }
+       }
+    }
+    closedir DIR;
+}
+
+$ldap->unbind;
+
+exit 0;
+
+sub getLocalConfig {
+  my $key = shift;
+
+  return $main::loaded{lc}{$key}
+    if (exists $main::loaded{lc}{$key});
+
+  my $val = qx(/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null);
+  chomp $val;
+  $main::loaded{lc}{$key} = $val;
+  return $val;
+}
+

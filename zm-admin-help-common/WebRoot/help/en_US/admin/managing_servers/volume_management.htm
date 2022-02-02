@@ -1,0 +1,235 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>Volume Management</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Servers\nVolume Management");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Volume Management</h1>
+<p>On a server's Volume page you manage storage volumes on the Zimbra Mailbox server. When Zimbra Collaboration Server is installed, one index volume and one message volume are configured on each mailbox server.</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>The Index volume is /opt/zimbra/index</p>
+</li>
+<li class="p">
+<p>The Message volume is /opt/zimbra/store</p>
+</li>
+</ul>
+<p>You can add new volumes, set the volume type, and set the compression threshold</p>
+<h2>Index Volume</h2>
+<p>Each Zimbra mailbox server is configured with one current index volume. &#160;Each mailbox is assigned to a permanent directory on the current index volume. When an account is created, the current index volume is automatically defined for the account. &#160;You cannot change which index volume the account is assigned. &#160;</p>
+<p>As volumes become full, you can create a new current index volume for new accounts. You can add new volumes, set the volume type, and set the compression threshold.</p>
+<p>Index volumes not marked current are still actively in use for the accounts assigned to them. Any index volume that is referenced by a mailbox as its index volume cannot be deleted.</p>
+<h2>Message Volume</h2>
+<p>When a new message is delivered or created, the message is saved in the current message volume. Message volumes can be created, but only one is configured as the current volume where new messages are stored. When the volume is full, you can configure a new current message volume. The current message volume receives all new messages. New messages are never stored in the previous volume.</p>
+<p>A current volume cannot be deleted, and message volumes that have messages referencing the volume cannot be deleted.</p>
+<h2>About the Volumes Page</h2>
+<p>The Volumes page shows the following information</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-weight: bold;">Manage Volumes section</p>
+</li>
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Volume Name</span><span>. The name of the volume. &#160;The initial volumes are named index1 and message1.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Volume Root Path</span><span>. The location in the file system where volume data is stored.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Volume Type</span><span>. The volume type is either Index or Primary Message, Secondary Message.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Compress Blobs</span><span>. When this box is checked, message blobs whose size is above the compression threshold are compressed. If blob compression is turned on, the disk space used is decreased.</span><span style="font-weight: bold;">&#160;Note</span><span>: &#160;Turning on blob compression also increases memory requirements for the server.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Compression Threshold</span><span>. Messages larger than the threshold are compressed. The default threshold is 4096 bytes.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Current</span><span>. A check mark is displayed next to volumes that are current.</span></p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Assign Current Volumes</span>. This can be either the message volume, secondary message volume, or the index volume.</p>
+</li>
+</ul>
+</li>
+<li class="p">
+<p style="font-weight: bold;">Assign Current Volumes section</p>
+</li>
+<li style="list-style: none; display: inline;">
+<ul style="list-style: circle;">
+<li class="p">
+<p style="font-weight: bold;">Current primary message volume<span style="font-weight: normal;">. The current primary volume name. New messages are saved in this current message volume.</span></p>
+</li>
+<li class="p">
+<p style="font-weight: bold;">Current secondary message volume<span style="font-weight: normal;">. The current secondary message volume name. Older data is stored on the secondary message volume.</span></p>
+</li>
+<li class="p">
+<p style="font-weight: bold;">Current index volume<span style="font-weight: normal;">. The current index volume name. As volumes become full, you can create a new current index volume for new accounts</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-weight: bold;">HSM Policy section</p>
+</li>
+</ul>
+<p style="margin-left: 40px;">To manage your disk utilization, you can implement a global <a href="implementing_hsm_policies.htm">HSM policy</a> or a different HSM policy for each mailbox server.</p>
+<ol style="list-style: circle;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: circle;">
+<li style="font-size: 10pt;">
+<p><span style="font-weight: bold;">Types of items to move</span>. You can select messages, tasks, appointments, contacts,and &#160;briefcase items to move from a primary volume to the current secondary volume.</p>
+</li>
+<li style="font-size: 10pt;">
+<p><span style="font-weight: bold;">Move items older than.</span> &#160;The default global HSM policy is to move messages and files more than 30 days old to the secondary volume. &#160;The age of items to be moved can be specified by number of days, months, weeks, hours, or minutes.</p>
+</li>
+<li style="list-style: circle; font-size: 10pt;">
+<p><span style="font-weight: bold;">Policy String</span>. You can use the search query language to set up other HSM policies. For example, if you wanted all messages marked as junk to be included in messages moved to the current secondary volume, you would add the following to the policy: <span style="font-weight: bold;">message:in:junk before:-[x] days</span>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>&#160;</p>
+
+<p><a href="javascript:void(0);" onclick="var e; if (parseInt(navigator.appVersion)>=4){e=event;}  if (parseInt(navigator.appVersion) &gt;=2 &amp;&amp; typeof(PopupMenu_Invoke) == 'function') PopupMenu_Invoke(e,'','Adding a New Storage Volume to the Server','adding_a_new_storage_volume_to_the_server.htm','Hierarchical Storage Management','hierarchical_storage_management.htm');return false;" title=" Related Topics"><span style="font-family:Arial;font-size:8pt;font-weight:normal;font-style:normal;text-decoration:none"><nobr>  Related Topics </nobr></span></a> </p>
+
+<p>&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="JavaScript">//<![CDATA[
+if (parseInt(navigator.appVersion) >= 3 && typeof (WritePopupMenuLayer) == "function")
+  WritePopupMenuLayer();
+//]]></script><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!--
+ * ***** BEGIN LICENSE BLOCK *****
+ *
+ * Zimbra Collaboration Suite Web Client
+ * Copyright (C) 2014, 2016 Synacor, Inc.
+ *
+ * The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at: https://www.zimbra.com/license
+ * The License is based on the Mozilla Public License Version 1.1 but Sections 14 and 15
+ * have been added to cover use of software over a computer network and provide for limited attribution
+ * for the Original Developer. In addition, Exhibit A has been modified to be consistent with Exhibit B.
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied.
+ * See the License for the specific language governing rights and limitations under the License.
+ * The Original Code is Zimbra Open Source Web Client.
+ * The Initial Developer of the Original Code is Zimbra, Inc.  All rights to the Original Code were
+ * transferred by Zimbra, Inc. to Synacor, Inc. on September 14, 2015.
+ *
+ * All portions of the code are Copyright (C) 2014, 2016 Synacor, Inc. All Rights Reserved.
+ *
+ * ***** END LICENSE BLOCK *****
+-->
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 10" />
+<title>admin wizard</title>
+<link rel="StyleSheet" href="../default.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+-->
+</style>
+<script type="text/javascript" language="javascript1.2" src="../whmsg.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript" src="../whver.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whutils.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whproxy.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whlang.js" charset="utf-8"></script>
+<script type="text/javascript" language="javascript1.2" src="../whtopic.js" charset="utf-8"></script>
+
+</head>
+<body><script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.gbWhTopic)
+{
+	var strUrl = document.location.href;
+	var bc = 0;
+	var n = strUrl.toLowerCase().indexOf("bc-");
+	if(n != -1)
+	{
+		document.location.href = strUrl.substring(0, n);
+		bc = strUrl.substring(n+3);
+	}
+
+	if (window.addTocInfo)
+	{
+	addTocInfo("Managing Delegated Administration\nProvisioning Delegated Administrators");
+addButton("show",BTN_TEXT,"Show TOC","","","","",0,0,"","","");
+
+	}
+	if (window.writeBtnStyle)
+		writeBtnStyle();
+
+	if (window.writeIntopicBar)
+		writeIntopicBar(1);
+
+	
+	
+}
+else
+	if (window.gbIE4)
+		document.location.reload();
+
+onLoadHandler = function()
+{
+  if (window.setRelStartPage)
+	{
+	setTimeout("setRelStartPage('../administration_console_help_draft8514.htm');", 1)
+
+    setTimeout("UpdateBreadCrumbsMarker();", 1);
+	}
+}
+
+if (window.addEventListener){  
+	window.addEventListener('load', onLoadHandler, false);   
+} else if (window.attachEvent){  
+	window.attachEvent('onload', onLoadHandler);  
+}
+
+function onSetStartPage()
+{
+  autoSync(1);
+  sendSyncInfo();
+  sendAveInfoOut();
+}
+//-->
+//]]></script>
+<script type="text/javascript" src="../ehlpdhtm.js" language="JavaScript1.2"></script>
+
+<p><img src="../zimbra_logo.png" alt="" style="border: none;" border="0" /></p>
+<hr width="95%" align="left" />
+
+<h1>Provisioning Delegated Administrators and Granting Rights</h1>
+<p>The New Administrator wizard guides you through the steps to create either a new global, <a href="delegated_administration.htm">delegated administrator or an administrator group</a>. &#160;For delegated administrator accounts, the global administrator can grant appropriate administration rights and views to perform specific administration tasks from the admin console.</p>
+<ol style="list-style: decimal;">
+<li class="p">
+<p>Choose the Administrator Type:</p>
+<ul>
+<li class="p" style="list-style: disc;">
+<p><span style="font-weight: bold;">Admin Group</span>. An Admin Group is a distribution list (DL) that has been flagged as a delegated administrator DL. Administrator accounts you assign to this DL have the admin rights and views that have been granted to the DL.</p>
+</li>
+<li class="p" style="list-style: disc;">
+<p><span style="font-weight: bold;">Admin Account</span>. An admin account is a user account that has Administrator enabled on the account. You can create a global administrator or a delegated administrator and grant specific views and rights to the delegated administrator account.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="margin-left: 40px;">Click <span style="font-weight: bold;">Next</span>.</p>
+<ol start="2" style="list-style: decimal;">
+<li class="p">
+<p>Create a new administrator account or administrator group. You can create the following:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p><a class="dropspot" href="javascript:TextPopup(this)" id="a2">Global Administrator</a></p>
+</li>
+<li class="p">
+<p><a class="dropspot" href="javascript:TextPopup(this)" id="a3">Delegated administrator that is assigned to one or more existing administrator groups</a></p>
+</li>
+<li class="p">
+<p><a class="dropspot" href="javascript:TextPopup(this)" id="a4">Delegated administrator that is granted specific administration views and rights</a></p>
+</li>
+<li class="p">
+<p><a class="dropspot" href="javascript:TextPopup(this)" id="a5">Admin Group that is granted specific administration views and rights</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="margin-left: 40px;">When you click Next or Finished, the account is provisioned and will display in the Accounts list view.</p>
+<ol start="3" style="list-style: decimal;">
+<li class="p">
+<p>If you clicked <span style="font-weight: bold;">Next</span>, you can select which <a href="javascript:void(0);" onclick="BSSCPopup('admin_wizard_text0.htm');return false;" onmouseover="if (parseInt(navigator.appVersion) >= 4) BSPSPopupOnMouseOver(event);" class="popupspot" >admin views</a> this administrator should have.</p>
+</li>
+</ol>
+<p style="margin-left: 40px;">If you assigned a specific administrator role to the admin account, the <span style="font-weight: bold;">Inherited Admin Views</span> column on the Admin Views dialog displays the views associated with that role. You can select additional views from the <span style="font-weight: bold;">Directly Assigned Admin Views</span> column. C<span>lick</span> <span style="font-weight: bold;">Next.</span></p>
+<ol start="4" style="list-style: decimal;">
+<li class="p">
+<p style="margin-left: 0px;">The <span style="font-weight: bold;">Configure the Grants</span> dialog displays the rights required to display all the items in the selected directly assigned views. If you do not need to modify the rights associated with the views and do not want to grant additional rights, click <span style="font-weight: bold;">Finish</span>. The grants that are displayed are configured.</p>
+</li>
+</ol>
+<p style="margin-left: 40px;">Click <span style="font-weight: bold;">Next</span> if you want to grant additional rights. The displayed grants are configured.</p>
+<p style="margin-left: 40px;">When the Information dialog opens, click <span style="font-weight: bold;">OK</span>.</p>
+<p style="margin-left: 40px;">If you do not want to grant these rights, but want to grant other rights at this time, click <span style="font-weight: bold;">Skip</span>. &#160;An empty Configure the Grants dialog displays.</p>
+<ol start="5" style="list-style: decimal;">
+<li class="p">
+<p style="margin-left: 0px;">If you click Next or Skip, you can configure <a href="javascript:void(0);" onclick="BSSCPopup('admin_wizard_text1.htm');return false;" onmouseover="if (parseInt(navigator.appVersion) >= 4) BSPSPopupOnMouseOver(event);" class="popupspot" >Access Control Entries (ACE)</a> for this admin account or group:</p>
+<ol style="list-style: lower-alpha;">
+<li class="p">
+<p style="margin-left: 0px;">Click <span style="font-weight: bold;">Add</span> to add an ACE. Select the <a href="delegated_administration_target_types.htm">Target Type</a> from the menu.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;">Enter the target's name. For example, domain_name@example.com. The name must be the same as configured in ZCS.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;">Select the type of right to grant, either <span style="font-weight: bold;">System Defined Right</span> or an individual <span style="font-weight: bold;">Attribute Right</span>.</p>
+<ul style="list-style: circle;">
+<li class="p">
+<p style="margin-left: 0px;"><span style="margin-left: 0px;">If you select System Defined Right, you must enter the name of the right associated with that target. &#160;For a list of rights, see the</span> <span style="margin-left: 0px; font-weight: bold;">Rights</span> <span style="margin-left: 0px;">folder in the Overview Pane Configuration section.</span></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li style="list-style: none; display: inline;">
+<ol style="list-style: circle;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: url('../blue_right.jpg');">
+<li class="p" style="list-style: circle;">
+<p style="margin-left: 0px;"><span style="margin-left: 0px;">If you select <a href="inline_attribute_rights.htm">Attribute Right</a>, you must select whether the right is read-only (get) or read and write (set).</span></p>
+</li>
+
+<li class="p-note">
+<p class="note">If you do not know the attribute name, run the CLI <span style="font-weight: bold;">zmprov describe</span> to see the attribute names. (This list also includes attributes that cannot be set for delegated administration.)</p>
+</li>
+</ul>
+<ul style="list-style: circle;">
+<li class="p">
+<p style="margin-left: 0px;"><span><span style="margin-left: 0px;">The attribute right target type associated with the target type you selected are listed.</span></span></p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;"><span><span><span style="margin-left: 0px;">Enter the attribute associated with the right. The right name is created as you type.</span></span></span></p>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li class="p" style="list-style: lower-alpha;">
+<p style="margin-left: 0px;"><span><span><span style="margin-left: 0px;">Select whether this is a positive right or a <a class="dropspot" href="javascript:TextPopup(this)" id="a1">negative right</a>.</span></span></span></p>
+</li>
+<li class="p" style="list-style: lower-alpha;">
+<p style="margin-left: 0px;"><span><span><span style="margin-left: 0px;">If this administrator can grant this right to another delegated administrator, check <span style="font-weight: bold;">Can grant the right to other admins</span>.</span></span></span></p>
+</li>
+<li class="p" style="list-style: lower-alpha;">
+<p style="margin-left: 0px;">Click <span style="font-weight: bold;">Add and More</span> to add this right and open the Add ACE window again to add another right. Click <span style="font-weight: bold;">Add and Finish</span> to add this right and finish the configuration.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p style="margin-left: 0px;">See the Administrator Guide Delegated Administration chapter, Specific Access Rights for examples of access rights for specific situations, such as setting up delegated administration roles to manage multiple domains, change passwords, or manage cross mailbox searches.</p>
+<p style="margin-left: 0px;">&#160;</p>
+<p>&#160;</p>
+<p>-------------------------------------------------------------------------------------------------------<br />
+<span style="font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright @ 2005-2017 Synacor, Inc. All rights reserved. "Zimbra" is a registered trademark of Synacor, Inc.</font></span></p>
+<script type="text/javascript" language="javascript1.2">//<![CDATA[
+<!--
+if (window.writeIntopicBar)
+	writeIntopicBar(0);
+
+
+highlightSearch();
+//-->
+//]]></script>
+</body>
+</html>

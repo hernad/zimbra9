@@ -1,0 +1,64 @@
+#!/usr/bin/perl
+# 
+# ***** BEGIN LICENSE BLOCK *****
+# Zimbra Collaboration Suite Server
+# Copyright (C) 2006, 2007, 2009, 2010, 2013, 2014, 2015, 2016 Synacor, Inc.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation,
+# version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.
+# If not, see <https://www.gnu.org/licenses/>.
+# ***** END LICENSE BLOCK *****
+# 
+
+use strict;
+
+if ($#ARGV != 2) {
+    print STDERR "Usage: zmqaction action queuename queuid1[,queueid2]+\n";
+    exit(1);
+}
+
+my $action = $ARGV[0];
+my $queue = $ARGV[1];
+my $idarg = $ARGV[2];
+
+my $paction;
+if ($action eq "hold") {
+    $paction = "-h";
+} elsif ($action eq "release") {
+    $paction = "-H";
+} elsif ($action eq "requeue") {
+    $paction = "-r";
+} elsif ($action eq "delete") {
+    $paction = "-d";
+} else {
+    print STDERR "ERROR: unknown action $action\n";
+    exit(1);
+}
+
+
+if ($queue !~ /^(incoming|active|deferred|hold|maildrop|corrupt)$/) {
+    print STDERR "ERROR: unknown queue $queue\n";
+    exit(1);
+}
+
+if ($idarg eq "ALL") {
+    system("sudo /opt/zimbra/common/sbin/postsuper $paction ALL $queue");
+} else {
+    my @ids = split(',', $idarg);
+    my $command = "sudo /opt/zimbra/common/sbin/postsuper $paction - $queue";
+    if (open(POSTSUPER, "| $command")) {
+        foreach my $id (@ids) {
+            print POSTSUPER $id, "\n";
+        }
+        close(POSTSUPER);
+    } else {
+        print STDERR "ERROR: command $command: $!\n";
+        exit(1);
+    }
+}

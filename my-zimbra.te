@@ -1,0 +1,14 @@
+
+module my-zimbra 1.0;
+
+require {
+	type init_t;
+	type su_exec_t;
+	class file { execute execute_no_trans open read };
+}
+
+#============= init_t ==============
+allow init_t su_exec_t:file execute_no_trans;
+
+#!!!! This avc is allowed in the current policy
+allow init_t su_exec_t:file { execute open read };

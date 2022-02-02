@@ -1,0 +1,67 @@
+#!/usr/bin/perl
+# 
+# ***** BEGIN LICENSE BLOCK *****
+# Zimbra Collaboration Suite Server
+# Copyright (C) 2005, 2006, 2007, 2009, 2010, 2013, 2014, 2016 Synacor, Inc.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation,
+# version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.
+# If not, see <https://www.gnu.org/licenses/>.
+# ***** END LICENSE BLOCK *****
+# 
+
+use strict;
+use Getopt::Long;
+use English;
+
+# Extracts all SQL statements logged to the sqltrace category
+# from the specified logfile.  If a logfile is not specified,
+# reads mailbox.log.
+
+# Options
+my $usage = 0;
+my $logDir = "/opt/zimbra/log";
+
+if ($^O !~ /MSWin/i) {
+    $logDir = qx(zmlocalconfig -x -m nokey zimbra_log_directory);
+    chomp $logDir;
+}
+
+GetOptions("help" => \$usage);
+
+if ($usage) {
+    usage();
+    exit(0);
+}
+
+if (scalar(@ARGV) == 0) {
+    # No file was specified, so read mailbox.log
+    push(@ARGV, $logDir . "/mailbox.log");
+}
+
+while (<>) {
+    if (/sqltrace - (.*) - \d+ms/i) {
+	print($1 . "\n");
+	my $query = $1;
+    }
+}
+
+#########################
+
+sub usage() {
+    print <<USAGE_EOF
+Usage: $PROGRAM_NAME [logfile]
+
+Extracts all SQL statements logged to the sqltrace category
+from the specified logfile.  If a logfile is not specified,
+reads mailbox.log.
+
+  -h, --help           Display this usage message
+USAGE_EOF
+}

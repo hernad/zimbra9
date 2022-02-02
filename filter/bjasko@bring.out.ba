@@ -1,0 +1,138 @@
+require ["fileinto", "copy", "reject", "tag", "flag", "variables", "log", "enotify", "envelope", "body", "ereject", "reject", "relational", "comparator-i;ascii-numeric"];
+
+# bhtelecom
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "eracun.bht@bhtelecom.ba") {
+    tag "bhtelecom";
+    stop;
+}
+
+# epbih
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "e-racun@epbih.ba") {
+    tag "elektro";
+    stop;
+}
+
+# mail+err
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "MAILER-DAEMON@smtp-in-2.bring.out.ba") {
+    fileinto "mailq-err";
+    stop;
+}
+
+# kimtec
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "webshop@kimtec.ba") {
+    fileinto "Dobavljači";
+    stop;
+}
+
+# SPF
+if anyof (body :contains "SPF: Pass") {
+    tag "SPF-OK";
+}
+
+# reports-smtp
+if allof (header :contains ["subject"] "Report Domain") {
+    fileinto "/mail-reports";
+    stop;
+}
+
+# mail err
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "MAILER-DAEMON@zimbra.bring.out.ba",
+  header :is ["subject"] "Undelivered Mail Returned to Sender") {
+    fileinto "mailq-err";
+    stop;
+}
+
+# ugovor 2019
+if anyof (header :contains ["subject"] "ugovor 2019") {
+    tag "ugovori_2019";
+    stop;
+}
+
+# lets
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "expiry@letsencrypt.org") {
+    tag "certs";
+    stop;
+}
+
+# nedzadb@gmail.com
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "MAILER-DAEMON",
+  body :contains "nedzadb@gmail.com") {
+    discard;
+}
+
+# mailerr
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "MAILER-DAEMON@pub") {
+    fileinto "mailq-err";
+    stop;
+}
+
+# cron2
+if allof (header :contains ["subject"] "Cron") {
+    fileinto "CRON";
+    stop;
+}
+
+# BUG
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "F18@bug.out.ba") {
+    fileinto "/F18_BUG";
+    stop;
+}
+
+# UNIEXPERT
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "marketing@ue.ba") {
+    fileinto "Dobavljači";
+    stop;
+}
+
+# asbis
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "@asbis.ba") {
+    fileinto "Dobavljači";
+    stop;
+}
+
+# ZFS hano
+disabled_if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "cs@bring.out.ba",
+  header :is ["subject"] "Hano GreenBox ZFS status") {
+    fileinto "Bekapi";
+    stop;
+}
+
+# CT
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "sales.ba@comtrade.com") {
+    fileinto "Dobavljači";
+    stop;
+}
+
+# pfsense
+disabled_if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "podrska@bring.out.ba",
+  header :is ["subject"] "pfSense.bring.out.ba - Notification") {
+    fileinto "pfsense";
+    stop;
+}
+
+# cron
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "root@vindija.ba") {
+    fileinto "CRON";
+    stop;
+}
+
+# KIMTEC
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "marketing@kimtec.ba") {
+    fileinto "Dobavljači";
+    stop;
+}
+
+# BBI
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "eizvodi@bbi.ba") {
+    fileinto "BBI Izvodi";
+    stop;
+}
+
+# Activity Stream
+disabled_if anyof (bulk,
+  list,
+  not me :in "to,cc") {
+    fileinto "Activity Stream";
+}
+
+

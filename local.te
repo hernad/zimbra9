@@ -1,0 +1,11 @@
+
+module local 1.0;
+
+require {
+	type init_t;
+	type su_exec_t;
+	class file open;
+}
+
+#============= init_t ==============
+allow init_t su_exec_t:file open;

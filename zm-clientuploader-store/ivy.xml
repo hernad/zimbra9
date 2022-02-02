@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+ <info organisation="zimbra" module="zm-clientuploader-store" status="integration">
+ </info>
+ <dependencies>
+  <dependency org="commons-fileupload" name="commons-fileupload" rev="1.4" />
+  <dependency org="org.apache.httpcomponents" name="httpclient" rev="${httpclient.version}"/>
+  <dependency org="org.apache.httpcomponents" name="httpcore" rev="${httpclient.httpcore.version}"/>
+  <dependency org="org.apache.httpcomponents" name="httpmime" rev="${httpclient.version}"/>
+  <dependency org="junit" name="junit" rev="4.8.2" />
+  <dependency org="servlet-api" name="servlet-api" rev="3.1" />
+  <dependency org="zimbra" name="zm-client" rev="latest.integration" />
+  <dependency org="zimbra" name="zm-common" rev="latest.integration" />
+  <dependency org="zimbra" name="zm-soap" rev="latest.integration" />
+  <dependency org="zimbra" name="zm-store" rev="latest.integration" />
+ </dependencies>
+</ivy-module>
+

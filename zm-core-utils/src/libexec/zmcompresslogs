@@ -1,0 +1,72 @@
+#!/usr/bin/perl -w
+# 
+# ***** BEGIN LICENSE BLOCK *****
+# Zimbra Collaboration Suite Server
+# Copyright (C) 2012, 2013, 2014, 2015, 2016 Synacor, Inc.
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software Foundation,
+# version 2 of the License.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License along with this program.
+# If not, see <https://www.gnu.org/licenses/>.
+# ***** END LICENSE BLOCK *****
+use Getopt::Long;
+use lib "/opt/zimbra/common/lib/perl5";
+use IO::Compress::Gzip qw(gzip $GzipError);
+sub scanLogDirectory;
+sub getLocalConfigValue;
+sub usage;
+
+my ($help, $verbose);
+GetOptions("help" => \$help,
+           "verbose" => \$verbose);
+
+my $zimbra_log_directory="/opt/zimbra/log";
+
+my @logfiles = qw(mailbox.log audit.log sync.log synctrace.log wbxml.log milter.log convertd.log ews.log);
+
+usage() if $help;
+scanLogDirectory($zimbra_log_directory);
+
+
+sub usage() {
+  print "$0 [-help] [-verbose]\n";
+  exit;
+}
+
+sub scanLogDirectory($) {
+  my ($logDirectory) = @_;
+   if (opendir DIR, "$logDirectory") {
+    my @logs = grep { !/^[\._]/ } readdir(DIR);
+    foreach my $log (@logs) {
+      next if ($log =~ /\.gz$/); # skip files already compressed.
+      next if ($log !~ /\.\d{4}-\d{2}-\d{2}$/);
+      foreach $str (@logfiles) {
+        if ($log =~ /$str/) {
+          compressLogFile("$logDirectory/$log");
+        }
+      }
+    }
+  }
+}
+
+sub compressLogFile($) {
+  my ($logfile) = @_;
+  if (gzip $logfile => "$logfile.gz") {
+    print "Compressed $logfile.\n" if $verbose;
+    unlink($logfile);
+  } else {
+    print "compression failed for $logfile. $GzipError\n";
+  }
+}
+
+sub getLocalConfigValue($) {
+  my ($key) = @_;
+  my $val = qx(/opt/zimbra/bin/zmlocalconfig -x -s -m nokey ${key} 2> /dev/null);
+  chomp $val;
+  return $val;
+}

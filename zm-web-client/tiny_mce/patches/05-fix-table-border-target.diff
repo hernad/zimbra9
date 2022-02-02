@@ -1,0 +1,51 @@
+From 4f157684f1a91520d4fbdc33504425322cf36333 Mon Sep 17 00:00:00 2001
+From: Dan Villiom Podlaski Christiansen <dchristiansen@zimbra.com>
+Date: Tue, 20 Jan 2015 15:11:51 +0100
+Subject: [PATCH] Accessible labels for form comboboxes
+
+The label for attribute values for the border color and background
+color edit fields (Table Properties - Advanced tab) did not match the
+corresponding id attribute values of the input fields.
+
+This change ensures the for attribute value matches the id attribute
+of the INPUT field, but adding explicit support for the trick used by
+comboboxes for pointing to their INPUT element.
+---
+diff -aur -x node_modules /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/Form.ts tinymce-4.7.9/src/ui/main/ts/Form.ts
+--- /tmp/zimbra/tinymce-4.7.9/src/ui/main/ts/Form.ts	2018-02-27 07:36:50.000000000 -0500
++++ tinymce-4.7.9/src/ui/main/ts/Form.ts	2018-03-12 05:47:55.359847177 -0400
+@@ -65,17 +65,25 @@
+ 
+     // Wrap any labeled items in FormItems
+     items.each(function (ctrl) {
+-      let formItem;
++      let formItem, inputId;
+       const label = ctrl.settings.label;
+ 
+       if (label) {
++        inputId = ctrl._id;
++
++        // point to the INPUTs of comboxes
++        // see the corresbonding TODO in ComboBox.ts
++        if (ctrl.subinput) {
++          inputId += '-' + ctrl.ariaTarget;
++        }
++
+         formItem = new FormItem(Tools.extend({
+           items: {
+             type: 'label',
+             id: ctrl._id + '-l',
+             text: label,
+             flex: 0,
+-            forId: ctrl._id,
++            forId: inputId,
+             disabled: ctrl.disabled()
+           }
+         }, self.settings.formItemDefaults));
+@@ -154,4 +162,4 @@
+     self.on('show', recalcLabels);
+     recalcLabels();
+   }
+-});
+\ No newline at end of file
++});

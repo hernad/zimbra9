@@ -1,0 +1,56 @@
+<project name="zm-taglib" default="jar">
+
+    <import file="../zm-zcs/ant-global.xml" />
+
+    <property environment="env"/>
+    <property name="root.dir" location=""/>
+    <property name="jarfile" location="${build.dir}/zimbrataglib.jar" />
+
+    <target name="docs" depends="jar" description="build tld docs in build/docs directory">
+        <java fork="true" jar="jars/tlddoc.jar" failonerror="true">
+            <arg line="-d ${build.dir}/docs"/>
+            <arg value="${jarfile}"/>
+        </java>
+    </target>
+
+    <target name="clean" description="Removes any built/temporary files">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="copy-build-dependencies" description="Temporarily copies com folder from build/classes and resources/*.properties to root directory">
+        <copy todir="${root.dir}">
+            <fileset dir="${root.dir}/resources/">
+                <include name="*.properties"/>
+            </fileset>
+        </copy>
+        <copy todir="${root.dir}/com">
+            <fileset dir="${build.dir}/classes/com"/>
+        </copy>
+    </target>
+
+    <target name="delete-duplicate-dependencies" description="Deletes the temporarily copied ZimbraTL.properties file from root directory">
+        <delete>
+            <fileset dir="${root.dir}/" includes="*.properties"/>
+        </delete>
+        <delete includeEmptyDirs="true">
+            <fileset dir="${root.dir}/" includes="com/"/>
+        </delete>
+    </target>
+
+    <!--
+        The includes param in antcall copies an entire directory and adds it to the file jar.
+        In case of resources folder we need only the property files inside it but it copies the entire directory structure.
+        Hence, temporarily copying all the .properties files and /com folder from build/classes to root directory, adding them in the includes param and then deleting later.
+    -->
+
+    <target name="jar" depends="compile, copy-build-dependencies" description="Creates the jar file">
+        <antcall target="zimbra-jar">
+            <param name="implementation.title" value="Zimbra Taglib"/>
+            <!-- Overriding the base directory path used in ant-global.xml's zimbra-jar target -->
+            <param name="jar.build.dir" value="." />
+            <param name="includes" value="com/**, META-INF/**, *.properties" />
+        </antcall>
+        <antcall target="delete-duplicate-dependencies"></antcall>
+    </target>
+
+</project>

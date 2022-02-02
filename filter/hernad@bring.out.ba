@@ -1,0 +1,202 @@
+require ["fileinto", "copy", "reject", "tag", "flag", "variables", "log", "enotify", "envelope", "body", "ereject", "reject", "relational", "comparator-i;ascii-numeric"];
+
+# codeproject
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "mailout@maillist.codeproject.com") {
+    fileinto "Inbox/codeproject";
+    stop;
+}
+
+# [ovirt-users]
+if anyof (header :contains ["subject"] "[ovirt-users]") {
+    fileinto "Inbox/ovirt";
+    stop;
+}
+
+# AWS poruke
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "no-reply@sns.amazonaws.com") {
+    fileinto "Inbox/infra/AWS";
+    stop;
+}
+
+# dmarc reports
+if anyof (body :contains "DMARC  Report",
+  body :contains "DMARC Aggregate Report",
+  body :contains "aggregate DMARC report",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "noreply-dmarc") {
+    fileinto "Inbox/infra/DMARC";
+    stop;
+}
+
+# icu spam
+if allof (address :all :matches :comparator "i;ascii-casemap" ["from"] "*@*.icu") {
+    fileinto "Junk";
+    stop;
+}
+
+# infra-fb
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "root@fuelboss.com.ba") {
+    fileinto "Inbox/infra/fb";
+    stop;
+}
+
+# virusi undelivered mail
+if allof (address :all :matches :comparator "i;ascii-casemap" ["to"] "postmaster@pub*.out.ba",
+  header :contains ["subject"] "Undelivered Mail Returned to Sender") {
+    fileinto "Inbox/infra/postfix-errors/undelivered_mail";
+    stop;
+}
+
+# rama-glas nedzadb gmail
+disabled_if allof (body :contains "nedzadb@gmail.com") {
+    fileinto "Inbox/infra/postfix-errors/nedzadb_gmail";
+    stop;
+}
+
+# postfix sendere address rejected
+disabled_if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "MAILER-DAEMON",
+  body :contains "Sender address rejected: Access") {
+    fileinto "/Inbox/infra/postfix-errors/nedzadb_gmail/sender_access_rejected";
+    stop;
+}
+
+# infra-postfix-errors-urbzdk
+if allof (header :is ["subject"] "Postfix SMTP server: errors from unknown[185.12.78.192]") {
+    fileinto "Inbox/infra/postfix-errors/urbzdk";
+    stop;
+}
+
+# infra-urbzdk
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "root@urbzdk.ba") {
+    fileinto "Inbox/infra/ubrzdk";
+    stop;
+}
+
+# postfix-errors
+if allof (header :contains ["subject"] "Postfix SMTP server: errors from") {
+    fileinto "Inbox/infra/postfix-errors";
+    stop;
+}
+
+# cjenovnici ris
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "web@ris.ba") {
+    fileinto "/Inbox/cjenovnici";
+    stop;
+}
+
+# redmine
+if anyof (header :contains ["List-ID"] "redmine.bring.out.ba") {
+    fileinto "Inbox/redmine";
+    stop;
+}
+
+# news linkedin
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "news@linkedin.com") {
+    fileinto "Inbox/news";
+    stop;
+}
+
+# spam turnstile gate supplier 126.com
+if anyof (header :contains ["subject"] "turnstile gate supplier",
+  header :contains ["subject"] "Manufactured for washer",
+  header :contains ["subject"] "business in china",
+  header :contains ["subject"] "bbq grills manufacture",
+  header :contains ["subject"] "Hair Styling Tools Manufacturer",
+  header :contains ["subject"] "Aluminum foil containers",
+  header :contains ["subject"] "Electric enclosure",
+  header :contains ["subject"] "but it's better than to dwell in the dark",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "@126.com",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "@163.com",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "@yeah.net") {
+    fileinto "Junk";
+    stop;
+}
+
+# quora.com
+disabled_if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "@quora.com") {
+    fileinto "Inbox/quora";
+    stop;
+}
+
+# qq.com spam
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "@qq.com") {
+    fileinto "Junk";
+    stop;
+}
+
+# spam-umbrellas
+if allof (header :contains ["subject"] "Customized Umbrellas with good price") {
+    fileinto "Junk";
+    stop;
+}
+
+# spam
+if allof (header :contains ["subject"] "boxyjeja") {
+    fileinto "Junk";
+    stop;
+}
+
+# cjenovnik bbs
+if anyof (header :contains ["List-ID"] "cjenik.bbs.ba") {
+    fileinto "/Inbox/cjenovnici";
+    stop;
+}
+
+# comtrade sales
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "sales.ba@comtrade.com") {
+    fileinto "/Inbox/cjenovnici";
+    stop;
+}
+
+# F18 bugs
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "F18@bug.out.ba") {
+    fileinto "Inbox/F18-BUGS";
+    stop;
+}
+
+# izvodi bbi
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "eizvodi@bbi.ba",
+  header :is ["subject"] "Izvod broj") {
+    fileinto "Inbox/banka_bbi";
+    stop;
+}
+
+# infra-hano
+if allof (header :is ["subject"] "Hano GreenBox ZFS status") {
+    fileinto "Inbox/infra/rama-glas";
+    stop;
+}
+
+# infra-rama-glas
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "zimbra@rama-glas.com") {
+    fileinto "Inbox/infra/rama-glas";
+    stop;
+}
+
+# vindija
+if anyof (address :all :contains :comparator "i;ascii-casemap" ["from"] "zimbra@zimbra.vindija.ba",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "root@vindija.ba") {
+    fileinto "Inbox/infra/rama-glas";
+    stop;
+}
+
+# cjenovnici-asbis
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "marketing@asbis.ba") {
+    fileinto "/Inbox/cjenovnici";
+    stop;
+}
+
+# cjenovnici-ue
+if allof (address :all :contains :comparator "i;ascii-casemap" ["from"] "marketing@ue.ba") {
+    fileinto "/Inbox/cjenovnici";
+    stop;
+}
+
+# DMARC
+if anyof (address :all :contains :comparator "i;ascii-casemap" ["from"] "dmarc.yahoo.com",
+  address :all :contains :comparator "i;ascii-casemap" ["from"] "noreply-dmarc-support@google.com",
+  header :contains ["subject"] "Report Domain: rmlh.ba Submitter: esa1.blc.fi") {
+    fileinto "Inbox/infra/DMARC";
+    stop;
+}
+
+
