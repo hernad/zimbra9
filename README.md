@@ -1,6 +1,8 @@
-= bring.out zimbra 9.0.0 build
+bring.out zimbra 9.0.0 build
+============================
 
-== new build
+new build
+----------
 
 	cd zm-build
 
@@ -13,7 +15,8 @@
 
 
 
-== NOTES
+NOTES
+--------
 
 before git commit:
 
