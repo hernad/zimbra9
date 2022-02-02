@@ -2,3 +2,5 @@ juice*
 BUILDS
 zcs-*
 git_repos.tar.gz
+*.te
+*.pp
